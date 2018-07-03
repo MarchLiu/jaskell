@@ -15,3 +15,4 @@ hs_err_pid*
 *.iml
 .nrepl-port
 pom.xml
+pom.xml.asc
