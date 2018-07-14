@@ -25,7 +25,7 @@ public class OneOfTest extends Base{
     }
 
     /**
-     * Method: parse(State<T> s)
+     * Method: script(State<T> s)
      */
     @Test
     public void simple() throws Exception {

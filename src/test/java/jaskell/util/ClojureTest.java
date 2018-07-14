@@ -1,4 +1,4 @@
-package jasskell.util;
+package jaskell.util;
 
 import clojure.lang.IFn;
 import clojure.lang.PersistentArrayMap;

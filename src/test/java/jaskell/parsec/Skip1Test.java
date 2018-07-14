@@ -27,7 +27,7 @@ public class Skip1Test extends Base {
     public void after() throws Exception {
     }
     /**
-     * Method: parse(State<E> s)
+     * Method: script(State<E> s)
      */
     @Test
     public void simple() throws Exception {

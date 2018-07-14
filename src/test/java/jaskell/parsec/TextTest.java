@@ -22,7 +22,7 @@ public class TextTest extends Base {
     }
 
     /**
-     * Method: parse(State<E> s)
+     * Method: script(State<E> s)
      */
     @Test
     public void simple() throws Exception {
@@ -46,7 +46,7 @@ public class TextTest extends Base {
         Text s = new Text("Hello world");
         try {
             s.parse(state);
-            fail("expect parse failed because test data too large.");
+            fail("expect script failed because test data too large.");
         } catch (EOFException e) {
             assertTrue(true);
         }

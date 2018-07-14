@@ -24,7 +24,7 @@ public class ManyTillTest extends Base{
     }
 
     /**
-     * Method: parse(State<E> s)
+     * Method: script(State<E> s)
      */
     @Test
     public void TestManyTill() throws Exception {

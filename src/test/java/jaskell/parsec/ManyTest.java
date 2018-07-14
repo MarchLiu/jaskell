@@ -23,7 +23,7 @@ public class ManyTest extends Base {
     }
 
     /**
-     * Method: parse(State<E> s)
+     * Method: script(State<E> s)
      */
     @Test
     public void simple() throws Exception {

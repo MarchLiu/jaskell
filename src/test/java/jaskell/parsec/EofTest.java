@@ -23,7 +23,7 @@ public class EofTest extends Base {
     }
 
     /**
-     * Method: parse(State<T> s)
+     * Method: script(State<T> s)
      */
     @Test
     public void testEof() throws Exception {

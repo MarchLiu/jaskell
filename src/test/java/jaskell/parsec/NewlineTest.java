@@ -27,7 +27,7 @@ public class NewlineTest extends Base {
     }
 
     /**
-     * Method: parse(State<E> s)
+     * Method: script(State<E> s)
      */
     @Test
     public void simpleNl() throws Exception {

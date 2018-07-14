@@ -16,7 +16,7 @@ public class OneTest extends Base {
     }
 
     /**
-     * Method: parse(State<T> s)
+     * Method: script(State<T> s)
      */
     @Test
     public void testOne() throws Exception {

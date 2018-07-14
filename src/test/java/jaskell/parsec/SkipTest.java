@@ -18,7 +18,7 @@ public class SkipTest extends Base {
     public void after() throws Exception {
     }
     /**
-     * Method: parse(State<E> s)
+     * Method: script(State<E> s)
      */
     @Test
     public void oneSkip() throws Exception {

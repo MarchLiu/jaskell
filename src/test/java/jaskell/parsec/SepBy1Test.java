@@ -18,7 +18,7 @@ public class SepBy1Test extends Base {
     }
 
     /**
-     * Method: parse(State<E> s)
+     * Method: script(State<E> s)
      */
     @Test
     public void TestSepBy1() throws Exception {

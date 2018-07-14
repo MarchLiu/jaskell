@@ -17,7 +17,7 @@ public class SpaceTest extends Base {
     }
 
     /**
-     * Method: parse(State<E> s)
+     * Method: script(State<E> s)
      */
     @Test
     public void simpleSpace() throws Exception {
@@ -33,7 +33,7 @@ public class SpaceTest extends Base {
         Parsec<Character, Character> s = new Space();
         try {
             s.parse(state);
-            Assert.fail("Space parse tab char should failed.");
+            Assert.fail("Space script tab char should failed.");
         } catch (Exception e) {
             Assert.assertThat("We should catch a ParsecException.", e, IsInstanceOf.instanceOf(ParsecException.class));
         }

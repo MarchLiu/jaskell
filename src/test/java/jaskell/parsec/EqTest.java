@@ -23,7 +23,7 @@ public class EqTest extends Base {
     }
 
     /**
-     * Method: parse(State<T> s)
+     * Method: script(State<T> s)
      */
     @Test
     public void testEq() throws Exception {
