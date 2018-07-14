@@ -17,6 +17,18 @@ public class Update implements Directive {
         this._table = name;
     }
 
+    public Update.Set set(String field, Directive value){
+        var re = new Update.Set(field, value);
+        re._prefix = this;
+        return re;
+    }
+
+    public Update.Set set(Directive field, Directive value){
+        var re = new Update.Set(field, value);
+        re._prefix = this;
+        return re;
+    }
+
     @Override
     public String script() {
         return String.format("update %s", _table.script());
@@ -108,7 +120,9 @@ public class Update implements Directive {
 
         @Override
         public List<Parameter> parameters() {
-            return null;
+            var re = _field.parameters();
+            re.addAll(_value.parameters());
+            return re;
         }
     }
 }

@@ -63,5 +63,65 @@ public class Delete implements Directive {
             re._prefix = this;
             return re;
         }
+
+        public Delete.Where where(Predicate predicate){
+            var re = new Delete.Where();
+            re._prefix = this;
+            re._predicate = predicate;
+            return re;
+        }
+
+        public Returning returning(String names){
+            var re = new Returning(names);
+            re._prefix = this;
+            return re;
+        }
+
+        public Returning returning(String... names){
+            var re = new Returning(names);
+            re._prefix = this;
+            return re;
+        }
+
+        public Returning returning(Directive... names){
+            var re = new Returning(names);
+            re._prefix = this;
+            return re;
+        }
+    }
+
+    public static class Where extends Statement{
+        Directive _prefix;
+        Predicate _predicate;
+
+        @Override
+        public String script() {
+            return String.format("%s where %s", _prefix.script(), _predicate.script());
+        }
+
+        @Override
+        public List<Parameter> parameters() {
+            var re = _prefix.parameters();
+            re.addAll(_predicate.parameters());
+            return re;
+        }
+
+        public Returning returning(String names){
+            var re = new Returning(names);
+            re._prefix = this;
+            return re;
+        }
+
+        public Returning returning(String... names){
+            var re = new Returning(names);
+            re._prefix = this;
+            return re;
+        }
+
+        public Returning returning(Directive... names){
+            var re = new Returning(names);
+            re._prefix = this;
+            return re;
+        }
     }
 }

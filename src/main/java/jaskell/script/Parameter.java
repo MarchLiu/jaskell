@@ -22,11 +22,11 @@ public class Parameter<T> implements Directive {
     }
 
     public void value(T v){
-        _value = Optional.ofNullable(v);
+        _value = Optional.<T>ofNullable(v);
     }
 
     public boolean confirmed(){
-        return _value == null;
+        return _value != null;
     }
 
     public String placeHolder(){

@@ -1,5 +1,6 @@
 package jaskell.sql;
 
+import jaskell.parsec.State;
 import org.junit.*;
 
 import java.sql.Connection;
@@ -12,7 +13,8 @@ import java.util.stream.IntStream;
 import static jaskell.sql.SQL.*;
 
 public class WriteTest {
-    static final String url = "jdbc:sqlite::memory:";
+    // static final String url = "jdbc:sqlite::memory:";
+    static final String url = "jdbc:sqlite:/Users/mars/tmp/test.db";
     static final String table = "test";
 
     static private Connection conn;
@@ -23,8 +25,8 @@ public class WriteTest {
             // create a connection to the database
             conn = DriverManager.getConnection(url);
             System.out.println("Connection to SQLite has been established.");
-            conn.prepareStatement("create table test(id integer primary key autoincrement, content text)")
-                .execute();
+//            conn.prepareStatement("create table test(id integer primary key autoincrement, content text)")
+//                .execute();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -40,8 +42,8 @@ public class WriteTest {
     }
 
     @Test
-    public void insertRandom() {
-        Query query = insert().into(table, "content").values(p("data"));
+    public void insertTest() {
+        Statement query = insert().into(table, "content").values(p("data"));
         try(PreparedStatement statement = query.prepare(conn)){
             IntStream.range(0, 10).mapToObj(x->String.format("write %dth log", x)).forEach(log->{
                 try {
@@ -60,7 +62,20 @@ public class WriteTest {
     }
 
     @Test
-    public void clean(){
+    public void updateTest() {
+        Statement statement = update("test").set("content", p("data")).where(l("id").eq(p("id")));
+        statement.setParameter("id", 5);
+        statement.setParameter("data", "rewritten");
+        try {
+            statement.execute(conn);
+            Assert.assertTrue(true);
+        } catch (SQLException e) {
+            Assert.fail(Arrays.toString(e.getStackTrace()));
+        }
+    }
+
+    @Test
+    public void cleanTest(){
         Statement statement = delete().from(table);
         try{
             statement.execute(conn);

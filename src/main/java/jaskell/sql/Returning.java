@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Returning extends Statement {
+public class Returning extends Query {
     Directive _prefix;
     List<Directive> _names = new ArrayList<>();
 

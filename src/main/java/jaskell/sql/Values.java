@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Values extends Query {
+public class Values extends Statement {
     Directive _insert;
     List<Directive> _fields = new ArrayList<>();
 
