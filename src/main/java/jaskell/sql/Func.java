@@ -8,19 +8,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Func implements Directive {
-    Name _name;
+public class Func extends Literal {
     List<Directive> _args = new ArrayList<>();
 
     public Func(String name, Directive ... parameters){
-        _name = new Name(name);
+        super(name);
         _args.addAll(Arrays.asList(parameters));
     }
 
     @Override
     public String script() {
         return String.format("%s(%s)",
-                _name.script(),
+                super.script(),
                 _args.stream().map(Directive::script).collect(Collectors.joining(", ")));
     }
 

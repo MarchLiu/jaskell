@@ -1,20 +1,22 @@
 package jaskell.sql;
 
 import jaskell.parsec.State;
+import jaskell.util.Result;
 import org.junit.*;
+import org.junit.runners.MethodSorters;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.IntStream;
 
+import static jaskell.sql.Func.*;
 import static jaskell.sql.SQL.*;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WriteTest {
-    // static final String url = "jdbc:sqlite::memory:";
-    static final String url = "jdbc:sqlite:/Users/mars/tmp/test.db";
+    static final String url = "jdbc:sqlite::memory:";
     static final String table = "test";
 
     static private Connection conn;
@@ -25,8 +27,8 @@ public class WriteTest {
             // create a connection to the database
             conn = DriverManager.getConnection(url);
             System.out.println("Connection to SQLite has been established.");
-//            conn.prepareStatement("create table test(id integer primary key autoincrement, content text)")
-//                .execute();
+            conn.prepareStatement("create table test(id integer primary key autoincrement, content text)")
+                .execute();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -62,26 +64,35 @@ public class WriteTest {
     }
 
     @Test
-    public void updateTest() {
-        Statement statement = update("test").set("content", p("data")).where(l("id").eq(p("id")));
-        statement.setParameter("id", 5);
-        statement.setParameter("data", "rewritten");
-        try {
-            statement.execute(conn);
-            Assert.assertTrue(true);
+    public void updateTest() throws SQLException {
+        AtomicLong id = new AtomicLong();
+        Query findIdQuery = select(max(n("id")).as("id")).from(table);
+        System.out.println(findIdQuery.script());
+        try{
+            findIdQuery.scalar(conn, Integer.class).ifPresentOrElse(
+                    id::set,
+                    () -> System.out.println("data not found"));
+            System.out.println(id.get());
         } catch (SQLException e) {
-            Assert.fail(Arrays.toString(e.getStackTrace()));
+            e.printStackTrace();
         }
+        Statement statement = update(table).set("content", p("data")).where(l("id").eq(p("id")));
+        statement.setParameter("id", id.get());
+        statement.setParameter("data", "rewritten");
+        statement.execute(conn);
+
+        Query query = select("content").from(table).where(l("id").eq(id.get()));
+        Assert.assertEquals("rewritten", query.scalar(conn, String.class).get());
     }
 
     @Test
-    public void cleanTest(){
+    public void zooCleanTest(){
         Statement statement = delete().from(table);
         try{
             statement.execute(conn);
             Assert.assertTrue(true);
         } catch (SQLException|IllegalStateException e) {
-            Assert.fail(Arrays.toString(e.getStackTrace()));
+            Assert.fail(e.getMessage());
         }
     }
 }

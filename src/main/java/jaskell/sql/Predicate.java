@@ -65,4 +65,61 @@ public abstract class Predicate implements Directive {
         re._right = predicate;
         return re;
     }
+
+    public <T> Predicate or(T value){
+        var re = new Or();
+        re._left = this;
+        re._right = new Literal(value);
+        return re;
+    }
+
+    public <T> Predicate eq(T value){
+        var re = new Equal();
+        re._left = this;
+        re._right = new Literal(value);
+        return re;
+    }
+
+    public <T> Predicate ne(T value){
+        var re = new NotEqual();
+        re._left = this;
+        re._right = new Literal(value);
+        return re;
+    }
+
+    public <T> Predicate gt(T value){
+        var re = new Great();
+        re._left = this;
+        re._right = new Literal(value);
+        return re;
+    }
+
+    public <T> Predicate ls(T value){
+        var re = new Less();
+        re._left = this;
+        re._right = new Literal(value);
+        return re;
+    }
+
+    public <T> Predicate gte(T value){
+        var re = new GreateOrEqual();
+        re._left = this;
+        re._right = new Literal(value);
+        return re;
+    }
+
+    public <T> Predicate lse(T value){
+        var re = new LessOrEqual();
+        re._left = this;
+        re._right = new Literal(value);
+        return re;
+    }
+
+    public <T> Predicate like(T value){
+        var re = new LessOrEqual();
+        re._left = this;
+        re._right = new Literal(value);
+        return re;
+    }
+
 }

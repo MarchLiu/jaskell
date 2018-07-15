@@ -86,11 +86,11 @@ public class SQL {
     }
 
     public static Parameter p(String key){
-        return new JDBCParameter<>(key, String.class);
+        return new JDBCParameter<>(key);
     }
 
     public static <T> Parameter p(String key, Class<T> cls){
-        return new JDBCParameter<>(key, cls);
+        return new JDBCParameter<>(key);
     }
 
     public static And and(Directive left, Directive right){
