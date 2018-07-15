@@ -16,6 +16,7 @@ public class Combinator {
         return new Ahead<>(parser);
     }
 
+    @SafeVarargs
     public static <T, E> Parsec<T, E> choice(Parsec<T, E> ... parsers) {
         return new Choice<>(parsers);
     }

@@ -10,7 +10,7 @@ import java.util.Optional;
 public class JDBCParameter<T> extends Parameter<T> {
     // TODO: constructors type safe;
     public JDBCParameter(Object key){
-        super("?", key);
+        super("?", key, (Class<T>)Object.class);
     }
     public JDBCParameter(Object key, Class<T> cls){
         super("?", key, cls);

@@ -11,12 +11,6 @@ public class Parameter<T> implements Directive {
     private Class<T> _cls;
     private String _placeHolder;
 
-    public Parameter(String placeHolder, Object key){
-        this._placeHolder = placeHolder;
-        _key = key;
-        _cls = (Class<T>)Object.class;
-    }
-
     public Parameter(String placeHolder, Object key, Class<T> cls){
         this._placeHolder = placeHolder;
         _key = key;
@@ -28,7 +22,7 @@ public class Parameter<T> implements Directive {
     }
 
     public void value(T v){
-        _value = Optional.<T>ofNullable(v);
+        _value = Optional.ofNullable(v);
     }
 
     public boolean confirmed(){
