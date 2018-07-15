@@ -74,7 +74,8 @@ public class WriteTest {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        Statement statement = update(table).set("content", p("data")).where(l("id").eq(p("id")));
+        Statement statement = update(table).set("content", p("data"))
+                .where(l("id").eq(p("id", Integer.class)));
         statement.setParameter("id", id.get());
         statement.setParameter("data", "rewritten");
         statement.execute(conn);
