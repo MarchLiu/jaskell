@@ -67,12 +67,10 @@ public class WriteTest {
     public void updateTest() throws SQLException {
         AtomicLong id = new AtomicLong();
         Query findIdQuery = select(max(n("id")).as("id")).from(table);
-        System.out.println(findIdQuery.script());
         try{
             findIdQuery.scalar(conn, Integer.class).ifPresentOrElse(
                     id::set,
                     () -> System.out.println("data not found"));
-            System.out.println(id.get());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -82,7 +80,9 @@ public class WriteTest {
         statement.execute(conn);
 
         Query query = select("content").from(table).where(l("id").eq(id.get()));
-        Assert.assertEquals("rewritten", query.scalar(conn, String.class).get());
+        query.scalar(conn, String.class).ifPresentOrElse(
+                v->Assert.assertEquals("rewritten",v),
+                ()-> Assert.fail("data updated not found"));
     }
 
     @Test
