@@ -17,13 +17,13 @@ public abstract class Statement implements Directive {
     }
 
     public boolean execute(Connection connection) throws SQLException, IllegalStateException {
-        PreparedStatement statement = connection.prepareStatement(this.script());
-        List<Parameter> parameters = parameters();
-        for (Parameter parameter: parameters){
-            if(!parameter.confirmed()){
-                throw new IllegalStateException(String.format("parameter %s has not value", parameter.key()));
-            }
+        try(PreparedStatement statement = connection.prepareStatement(this.script())) {
+            syncParameters(statement);
+            return statement.execute();
         }
+    }
+
+    public boolean execute(PreparedStatement statement) throws SQLException, IllegalStateException {
         syncParameters(statement);
         return statement.execute();
     }
@@ -32,7 +32,14 @@ public abstract class Statement implements Directive {
         var flag = false;
         for (Parameter parameter:parameters()) {
             if (Objects.equals(parameter.key(), key)) {
-                parameter.value(value);
+                if(parameter.valueClass().isInstance(value)) {
+                    @SuppressWarnings("unchecked")
+                    Parameter<T> p = parameter;
+                    p.value(value);
+                } else {
+                    throw new IllegalArgumentException(String.format("parameter %s typed %s but received %s",
+                            parameter.key(), parameter.valueClass().getName(), value.getClass().getName()));
+                }
                 flag = true;
             }
         }
@@ -46,6 +53,12 @@ public abstract class Statement implements Directive {
     }
 
     public void syncParameters(PreparedStatement statement) throws SQLException {
+        List<Parameter> parameters = parameters();
+        for (Parameter parameter: parameters){
+            if(!parameter.confirmed()){
+                throw new IllegalStateException(String.format("parameter %s has not value", parameter.key()));
+            }
+        }
         clear(statement);
         var params = parameters();
         setOrder(params);

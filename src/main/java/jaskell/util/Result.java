@@ -5,6 +5,8 @@ import jaskell.parsec.Option;
 import java.util.Optional;
 import java.util.function.Function;
 
+// TODO: type safe
+@SuppressWarnings("unchecked")
 public class Result<T, E extends Throwable>{
     private Object slot;
     private boolean _ok;
@@ -19,7 +21,7 @@ public class Result<T, E extends Throwable>{
         this._ok = false;
     }
     
-    public <T, E extends Throwable> Optional<T> ok(){
+    public Optional<T> ok(){
         if(_ok){
             return Optional.of((T)slot);
         } else {
@@ -27,7 +29,7 @@ public class Result<T, E extends Throwable>{
         }
     }
 
-    public <T, E extends Throwable> Optional<E> err(){
+    public Optional<E> err(){
         if(_ok) {
             return Optional.empty();
         } else {

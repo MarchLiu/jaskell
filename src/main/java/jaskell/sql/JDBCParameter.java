@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public class JDBCParameter<T> extends Parameter<T> {
     // TODO: constructors type safe;
+    @SuppressWarnings("unchecked")
     public JDBCParameter(Object key){
         super("?", key, (Class<T>)Object.class);
     }

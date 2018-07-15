@@ -11,6 +11,8 @@ public class Parameter<T> implements Directive {
     private Class<T> _cls;
     private String _placeHolder;
 
+    protected Parameter(){}
+
     public Parameter(String placeHolder, Object key, Class<T> cls){
         this._placeHolder = placeHolder;
         _key = key;
@@ -60,4 +62,5 @@ public class Parameter<T> implements Directive {
         re.add(this);
         return re;
     }
+
 }

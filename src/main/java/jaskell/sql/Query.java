@@ -51,11 +51,9 @@ public abstract class Query extends Statement {
         return re;
     }
 
-    public ResultSet query(Connection conn) throws SQLException {
-        try(PreparedStatement statement = conn.prepareStatement(this.script())){
-            syncParameters(statement);
-            return statement.executeQuery();
-        }
+    public ResultSet query(PreparedStatement statement) throws SQLException {
+        syncParameters(statement);
+        return statement.executeQuery();
     }
 
     public Optional scalar(Connection conn) throws SQLException {
