@@ -12,8 +12,7 @@ import java.util.Objects;
 public abstract class Statement implements Directive {
 
     public PreparedStatement prepare(Connection connection) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(this.script());
-        return statement;
+        return connection.prepareStatement(this.script());
     }
 
     public boolean execute(Connection connection) throws SQLException, IllegalStateException {
