@@ -1,6 +1,8 @@
 package jaskell.parsec;
 
 import java.io.EOFException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Mars Liu on 2016-01-03.
@@ -8,7 +10,7 @@ import java.io.EOFException;
  * 信息抛出.如果所有的分路都解析失败,抛出异常.
  */
 public class Choice<T, E> implements Parsec<T, E> {
-    private Parsec<T, E>[] parsecs;
+    private List<Parsec<T, E>> parsecs;
 
     @Override
     public <Status, Tran, S extends State<E, Status, Tran>> T parse(S s)
@@ -35,6 +37,6 @@ public class Choice<T, E> implements Parsec<T, E> {
 
     @SafeVarargs
     public Choice(Parsec<T, E> ... parsecs) {
-        this.parsecs = parsecs;
+        this.parsecs = Arrays.asList(parsecs);
     }
 }

@@ -24,6 +24,12 @@ public class Do implements Directive {
         return re;
     }
 
+    public Update update(){
+        var re = new Update();
+        re._prefix = this;
+        return re;
+    }
+
     public class Update implements Directive {
         Directive _prefix;
 
