@@ -71,26 +71,9 @@ public class Delete implements Directive {
             return re;
         }
 
-        public Returning returning(String names){
-            var re = new Returning(names);
-            re._prefix = this;
-            return re;
-        }
-
-        public Returning returning(String... names){
-            var re = new Returning(names);
-            re._prefix = this;
-            return re;
-        }
-
-        public Returning returning(Directive... names){
-            var re = new Returning(names);
-            re._prefix = this;
-            return re;
-        }
     }
 
-    public static class Where extends Statement{
+    public static class Where extends Statement {
         Directive _prefix;
         Predicate _predicate;
 

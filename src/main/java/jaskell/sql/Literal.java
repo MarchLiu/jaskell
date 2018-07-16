@@ -14,6 +14,10 @@ public class Literal extends Predicate {
         _literal = Integer.valueOf(value).toString();
     }
 
+    Literal(long value){
+        _literal = Long.valueOf(value).toString();
+    }
+
     Literal(Number value){
         _literal = value.toString();
     }

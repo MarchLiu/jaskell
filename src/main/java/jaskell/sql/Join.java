@@ -29,9 +29,9 @@ class Join implements Directive {
         return re;
     }
 
-    public class On extends Query {
-        private Join _join;
-        private List<Predicate> _on = new ArrayList<>();
+    public static class On extends Query {
+        Join _join;
+        List<Predicate> _on = new ArrayList<>();
 
         public On on(Predicate _on){
             this._on.add(_on);
@@ -55,6 +55,18 @@ class Join implements Directive {
         public List<jaskell.script.Parameter> parameters() {
             var re = _join.parameters();
             _on.forEach(item->re.addAll(item.parameters()));
+            return re;
+        }
+
+        public Group group() {
+            var re = new Group();
+            re._prefix = this;
+            return re;
+        }
+
+        public Order order() {
+            var re = new Order();
+            re._prefix = this;
             return re;
         }
     }

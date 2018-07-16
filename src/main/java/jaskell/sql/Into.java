@@ -102,7 +102,7 @@ public class Into implements Directive {
     }
 
 
-    public static class Select extends jaskell.sql.Select {
+    public static class Select extends jaskell.sql.Select  {
         Into _into;
 
         public Select(){
@@ -132,5 +132,20 @@ public class Into implements Directive {
             re.addAll(super.parameters());
             return re;
         }
+
+        public Select.From from(String name){
+            var re = new From();
+            re._from = new Name(name);
+            re._select = this;
+            return re;
+        }
+
+        public Select.From from(Directive f) {
+            var re = new From();
+            re._select = this;
+            re._from = f;
+            return re;
+        }
     }
+
 }

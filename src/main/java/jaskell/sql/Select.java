@@ -83,8 +83,8 @@ public class Select extends Query {
     }
 
     public static class From extends Query {
-        private Select _select;
-        private Directive _from;
+        Select _select;
+        Directive _from;
 
         @Override
         public String script() {

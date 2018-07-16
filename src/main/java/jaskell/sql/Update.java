@@ -39,11 +39,12 @@ public class Update implements Directive {
         return _table.parameters();
     }
 
-    public class Set extends Query {
-        private Directive _prefix;
-        private List<Equation> _sets = new ArrayList<>();
+    public static class Set extends Query {
+        Directive _prefix;
+        List<Equation> _sets = new ArrayList<>();
+
         Set(String field, Directive value){
-            this._sets.add(new Equation(new Name(field), value));
+            _sets.add(new Equation(new Name(field), value));
         }
 
         public Set(Directive field, Directive value){
@@ -51,12 +52,12 @@ public class Update implements Directive {
         }
 
         public Set set(String field, Directive value){
-            this._sets.add(new Equation(field, value));
+            _sets.add(new Equation(field, value));
             return this;
         }
 
         public Set set(Directive field, Directive value){
-            this._sets.add(new Equation(field, value));
+            _sets.add(new Equation(field, value));
             return this;
         }
 
@@ -99,7 +100,7 @@ public class Update implements Directive {
         }
     }
 
-    public class Equation implements Directive {
+    public static class Equation implements Directive {
         Directive _field;
         Directive _value;
 

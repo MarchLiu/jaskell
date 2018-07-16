@@ -26,24 +26,6 @@ public class Values extends Statement {
         _fields.addAll(Arrays.asList(fields));
     }
 
-    public Returning returning(String names){
-        var re =  new Returning(names);
-        re._prefix = this;
-        return re;
-    }
-
-    public Returning returning(String ... names){
-        var re =  new Returning(names);
-        re._prefix = this;
-        return re;
-    }
-
-    public Returning returning(Directive names){
-        var re =  new Returning(names);
-        re._prefix = this;
-        return re;
-    }
-
     @Override
     public String script() {
         return String.format("%s values(%s)",
@@ -55,6 +37,12 @@ public class Values extends Statement {
     public List<jaskell.script.Parameter> parameters() {
         var re =  _insert.parameters();
         _fields.forEach(field->re.addAll(field.parameters()));
+        return re;
+    }
+
+    public On on(){
+        var re = new On();
+        re._prefix = this;
         return re;
     }
 }

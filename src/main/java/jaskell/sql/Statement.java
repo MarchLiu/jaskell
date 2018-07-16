@@ -73,4 +73,22 @@ public abstract class Statement implements Directive {
             parameters.get(i).order(i+1);
         }
     }
+
+    public Returning returning(String names){
+        var re =  new Returning(names);
+        re._prefix = this;
+        return re;
+    }
+
+    public Returning returning(String ... names){
+        var re =  new Returning(names);
+        re._prefix = this;
+        return re;
+    }
+
+    public Returning returning(Directive names){
+        var re =  new Returning(names);
+        re._prefix = this;
+        return re;
+    }
 }
