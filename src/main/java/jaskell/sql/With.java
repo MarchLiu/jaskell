@@ -4,10 +4,13 @@ import jaskell.script.Directive;
 import jaskell.script.Parameter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class With extends Query {
-    private Name _name;
+    Name _name;
+    List<Name> _fields = new ArrayList<>();
 
     With(){
 
@@ -19,6 +22,21 @@ public class With extends Query {
 
     With(Name name){
         _name = name;
+    }
+
+    With(String name, String fs){
+        _name = new Name(name);
+        _fields.addAll(Arrays.stream(fs.split(",")).map(Name::new).collect(Collectors.toList()));
+    }
+
+    With(Name name, String... fs){
+        _name = name;
+        _fields.addAll(Arrays.stream(fs).map(Name::new).collect(Collectors.toList()));
+    }
+
+    With(Name name, Name... fs){
+        _name = name;
+        _fields.addAll(Arrays.asList(fs));
     }
 
     public Name name(){
@@ -41,7 +59,7 @@ public class With extends Query {
         return re;
     }
 
-    public Recursive recursive(){
+    Recursive recursive(){
         var re = new Recursive();
         re._prefix = this;
         return re;
@@ -49,7 +67,12 @@ public class With extends Query {
 
     @Override
     public String script() {
-        return String.format("with %s", _name.script());
+        if(_fields.isEmpty()) {
+            return String.format("with %s", _name.script());
+        }else{
+            return String.format("with %s(%s)", _name.script(),
+                    _fields.stream().map(Directive::script).collect(Collectors.joining(", ")));
+        }
     }
 
     @Override
@@ -64,9 +87,26 @@ public class With extends Query {
 
         }
 
+        Recursive(String name, String fs){
+            super(name, fs);
+        }
+
+        Recursive(Name name, String... fs){
+            super(name, fs);
+        }
+
+        Recursive(Name name, Name... fs){
+            super(name, fs);
+        }
+
         @Override
         public String script() {
-            return String.format("with recursive %s", _prefix._name.script());
+            if(_fields.isEmpty()) {
+                return String.format("with recursive %s", _name.script());
+            }else{
+                return String.format("with recursive %s(%s)", _name.script(),
+                        _fields.stream().map(Directive::script).collect(Collectors.joining(", ")));
+            }
         }
     }
 
@@ -90,16 +130,51 @@ public class With extends Query {
         }
 
         public CommonTableExpression cte(String name){
-            var re = new CommonTableExpression();
+            var re = new CommonTableExpression(name);
             re._prefix = this;
-            re._name = new Name(name);
             return re;
         }
 
         public CommonTableExpression cte(Name name){
-            var re = new CommonTableExpression();
+            var re = new CommonTableExpression(name);
             re._prefix = this;
-            re._name = name;
+            return re;
+        }
+
+
+        public CommonTableExpression cte(String name, String fs){
+            var re = new CommonTableExpression(name, fs);
+            re._prefix = this;
+            return re;
+        }
+
+        public CommonTableExpression cte(Name name, String fs){
+            var re = new CommonTableExpression(name, fs);
+            re._prefix = this;
+            return re;
+        }
+
+        public CommonTableExpression cte(String name, String ... fs){
+            var re = new CommonTableExpression(name, fs);
+            re._prefix = this;
+            return re;
+        }
+
+        public CommonTableExpression cte(Name name, String ... fs){
+            var re = new CommonTableExpression(name, fs);
+            re._prefix = this;
+            return re;
+        }
+
+        public CommonTableExpression cte(String name, Name ... fs){
+            var re = new CommonTableExpression(name, fs);
+            re._prefix = this;
+            return re;
+        }
+
+        public CommonTableExpression cte(Name name, Name ... fs){
+            var re = new CommonTableExpression(name, fs);
+            re._prefix = this;
             return re;
         }
 
@@ -241,11 +316,50 @@ public class With extends Query {
     public static class CommonTableExpression implements Directive {
         Directive _prefix;
         Name _name;
+        List<Name> _fields = new ArrayList<>();
 
         public As as(Query query){
             var re =  new As(query);
             re._prefix = this;
             return re;
+        }
+
+        CommonTableExpression(String name){
+            this._name = new Name(name);
+        }
+
+        CommonTableExpression(Name name){
+            this._name = name;
+        }
+
+        CommonTableExpression(String name, String fs){
+            this._name = new Name(name);
+            this._fields.addAll(Arrays.stream(fs.split(",")).map(Name::new).collect(Collectors.toList()));
+        }
+
+        CommonTableExpression(String name, String... fs){
+            this._name = new Name(name);
+            this._fields.addAll(Arrays.stream(fs).map(Name::new).collect(Collectors.toList()));
+        }
+
+        CommonTableExpression(String name, Name... fs){
+            this._name = new Name(name);
+            this._fields.addAll(Arrays.asList(fs));
+        }
+
+        CommonTableExpression(Name name, String fs){
+            this._name = name;
+            this._fields.addAll(Arrays.stream(fs.split(",")).map(Name::new).collect(Collectors.toList()));
+        }
+
+        CommonTableExpression(Name name, String... fs){
+            this._name = name;
+            this._fields.addAll(Arrays.stream(fs).map(Name::new).collect(Collectors.toList()));
+        }
+
+        CommonTableExpression(Name name, Name... fs){
+            this._name = name;
+            this._fields.addAll(Arrays.asList(fs));
         }
 
         @Override
