@@ -1,6 +1,7 @@
 package jaskell.sql;
 
 import jaskell.script.Directive;
+import org.w3c.dom.ranges.DocumentRange;
 
 public abstract class Predicate implements Directive {
     public Predicate and(Predicate predicate){
@@ -122,4 +123,15 @@ public abstract class Predicate implements Directive {
         return re;
     }
 
+    public Predicate isNull(){
+        var re = new IsNull();
+        re._prefix = this;
+        return re;
+    }
+
+    public Predicate isNotNull(){
+        var re = new IsNotNull();
+        re._prefix = this;
+        return re;
+    }
 }

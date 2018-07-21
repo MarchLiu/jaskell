@@ -2,8 +2,10 @@ package jaskell.sql;
 
 import jaskell.parsec.Option;
 import jaskell.script.Directive;
+import jaskell.script.Parameter;
 
 import java.sql.*;
+import java.util.List;
 import java.util.Optional;
 
 public abstract class Query extends Statement {
@@ -77,5 +79,22 @@ public abstract class Query extends Statement {
             }
             return Optional.empty();
         }
+    }
+
+    public Query cache(){
+        Query self = this;
+        return new Query() {
+            private String _script = self.script();
+            private List<Parameter> _parameters = self.parameters();
+            @Override
+            public String script() {
+                return _script;
+            }
+
+            @Override
+            public List<Parameter> parameters() {
+                return _parameters;
+            }
+        };
     }
 }

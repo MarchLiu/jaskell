@@ -16,8 +16,8 @@ import static jaskell.sql.SQL.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WriteTest {
-    static final String url = "jdbc:sqlite::memory:";
-    static final String table = "test";
+    private static final String url = "jdbc:sqlite::memory:";
+    private static final String table = "test";
 
     static private Connection conn;
 

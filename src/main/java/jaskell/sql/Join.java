@@ -19,7 +19,7 @@ class Join implements Directive {
 
     @Override
     public String script() {
-        return String.format("%s join %s", _prefix, _join);
+        return String.format("%s join %s", _prefix.script(), _join.script());
     }
 
     @Override
@@ -29,7 +29,7 @@ class Join implements Directive {
         return re;
     }
 
-    public static class On extends Query {
+    public static class On extends Select.From {
         Join _join;
         List<Predicate> _on = new ArrayList<>();
 

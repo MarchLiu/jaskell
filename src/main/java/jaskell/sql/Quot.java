@@ -16,14 +16,6 @@ public class Quot extends Name {
         this._right = r;
     }
 
-    public String left(){
-        return _left;
-    }
-
-    public String right(){
-        return _right;
-    }
-
     @Override
     public String script() {
         return String.format("%s%s%s", this._left, super.script(), this._right);

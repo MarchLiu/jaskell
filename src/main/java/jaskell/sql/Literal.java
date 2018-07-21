@@ -48,6 +48,43 @@ public class Literal extends Predicate {
         return re;
     }
 
+    public Join join(Directive other){
+        var re = new Join();
+        re._prefix = this;
+        re._join = other;
+        return re;
+    }
+
+    public Left left(){
+        var re = new Left();
+        re._prefix = this;
+        return re;
+    }
+
+    public Right right(){
+        var re = new Right();
+        re._prefix = this;
+        return re;
+    }
+
+    public Full full(){
+        var re = new Full();
+        re._prefix = this;
+        return re;
+    }
+
+    public Inner inner(){
+        var re = new Inner();
+        re._prefix = this;
+        return re;
+    }
+
+    public Cross cross(){
+        var re = new Cross();
+        re._prefix = this;
+        return re;
+    }
+
     public static class Alias implements Directive {
         Name _name;
         Directive _prefix;
@@ -73,6 +110,43 @@ public class Literal extends Predicate {
         public List<Parameter> parameters() {
             var re = _prefix.parameters();
             re.addAll(_name.parameters());
+            return re;
+        }
+
+        public Join join(Directive other){
+            var re = new Join();
+            re._prefix = this;
+            re._join = other;
+            return re;
+        }
+
+        public Left left(){
+            var re = new Left();
+            re._prefix = this;
+            return re;
+        }
+
+        public Right right(){
+            var re = new Right();
+            re._prefix = this;
+            return re;
+        }
+
+        public Full full(){
+            var re = new Full();
+            re._prefix = this;
+            return re;
+        }
+
+        public Inner inner(){
+            var re = new Inner();
+            re._prefix = this;
+            return re;
+        }
+
+        public Cross cross(){
+            var re = new Cross();
+            re._prefix = this;
             return re;
         }
     }

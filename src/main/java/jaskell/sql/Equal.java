@@ -8,6 +8,6 @@ import java.util.List;
 public class Equal extends Binary {
     @Override
     protected String operator() {
-        return "=";
+        return " = ";
     }
 }

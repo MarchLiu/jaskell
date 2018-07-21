@@ -162,4 +162,16 @@ public class SQL {
         return new Func(name, args);
     }
 
+    public static Count count(){
+        return new Count();
+    }
+
+    public static Count count(String name){
+        return new Count(name);
+    }
+
+    public static Count count(Name name){
+        return new Count(name);
+    }
+
 }

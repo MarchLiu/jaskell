@@ -91,4 +91,21 @@ public abstract class Statement implements Directive {
         re._prefix = this;
         return re;
     }
+
+    public Statement cache(){
+        Statement self = this;
+        return new Statement() {
+            private String _script = self.script();
+            private List<Parameter> _parameters = self.parameters();
+            @Override
+            public String script() {
+                return _script;
+            }
+
+            @Override
+            public List<Parameter> parameters() {
+                return _parameters;
+            }
+        };
+    }
 }
