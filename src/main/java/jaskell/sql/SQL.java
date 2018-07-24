@@ -174,4 +174,11 @@ public class SQL {
         return new Count(name);
     }
 
+    public static Case _case() {
+        return new Case();
+    }
+
+    public static Case _case(Directive expr){
+        return new Case(expr);
+    }
 }

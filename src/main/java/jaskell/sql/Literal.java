@@ -89,11 +89,11 @@ public class Literal extends Predicate {
         Name _name;
         Directive _prefix;
 
-        public Alias(String alias) {
+        Alias(String alias) {
             this._name = new Name(alias);
         }
 
-        public Alias(Literal alias) {
+        Alias(Literal alias) {
             this._name = new Name(alias.script());
         }
 
