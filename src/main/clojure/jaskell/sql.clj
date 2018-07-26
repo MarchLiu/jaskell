@@ -1,14 +1,9 @@
 (ns jaskell.sql
   (:require [clojure.string :as str])
   (:import (jaskell.script Directive)
-           (jaskell.sql Query Statement JDBCParameter)
-           (clojure.lang Obj)))
+           (jaskell.sql Query Statement JDBCParameter)))
 
 (def returning :returning)
-
-(def from :from)
-
-(def where :where)
 
 (def as :as)
 
@@ -113,6 +108,10 @@
     (parameters []
       (->> tokens (map extract) flatten vec))))
 
+(def from :from)
+
+(def where :where)
+
 (defn in
   [& tokens]
   (proxy [Directive] []
@@ -170,10 +169,10 @@
   (proxy [Directive] []
     (script []
       (str "set " (->> tokens
-                          (map parse)
-                          (partition 3)
-                          (map #(str/join " " %))
-                          (str/join ", "))))
+                       (map parse)
+                       (partition 3)
+                       (map #(str/join " " %))
+                       (str/join ", "))))
     (parameters []
       (->> tokens (map extract) flatten vec))))
 
@@ -187,9 +186,7 @@
                   (nth tokens 2)
                   (nth tokens 1))
         returning? (last (butlast tokens))]
-    (if (or (= select select?) (= returning returning?))
-      true
-      false)))
+    (or (= select select?) (= returning returning?))))
 
 (defn parse-cte
   [cte]
@@ -230,11 +227,11 @@
 
 (defn t
   [^String token]
-  (str "'" token "'"))
+  (str "'" (str/replace token #"'" "''") "'"))
 
 (defn q
   [^String token]
-  (str "\"" token "\""))
+  (str "\"" (str/replace token #"\"" "\\\"") "\""))
 
 (defn p
   ([key]
