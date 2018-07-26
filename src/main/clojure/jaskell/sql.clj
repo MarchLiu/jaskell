@@ -8,8 +8,6 @@
 
 (def from :from)
 
-(def set :set)
-
 (def where :where)
 
 (def as :as)
@@ -58,6 +56,14 @@
 
 (def offset :offset)
 
+(def group :group)
+
+(def order :order)
+
+(def by :by)
+
+(def having :having)
+
 (defn partition-helper
   []
   (let [state (atom 0)
@@ -73,19 +79,25 @@
   [tokens]
   (.script (apply (first tokens) (rest tokens))))
 
+(declare parse-comma)
+
 (defn parse
   [token]
   (cond
     (keyword? token) (name token)
     (instance? Directive token) (.script token)
-    (vector? token) (->> token
-                         (partition-by (partition-helper))
-                         (map #(->> %
-                                    (map parse)
-                                    (str/join " ")))
-                         (str/join ", "))
+    (vector? token) (parse-comma token)
     (instance? String token) token
     :else (str token)))
+
+(defn parse-comma
+  [tokens]
+  (->> tokens
+       (partition-by (partition-helper))
+       (map #(->> %
+                  (map parse)
+                  (str/join " ")))
+       (str/join ", ")))
 
 (defn extract
   [token]
@@ -98,6 +110,22 @@
   (proxy [Query] []
     (script []
       (str "select " (->> tokens (map parse) (str/join " "))))
+    (parameters []
+      (->> tokens (map extract) flatten vec))))
+
+(defn in
+  [& tokens]
+  (proxy [Directive] []
+    (script []
+      (str "in (" (parse-comma tokens) ")"))
+    (parameters []
+      (->> tokens (map extract) flatten vec))))
+
+(defn by
+  [& tokens]
+  (proxy [Directive] []
+    (script []
+      (str "by (" (parse-comma tokens) ")"))
     (parameters []
       (->> tokens (map extract) flatten vec))))
 
@@ -126,7 +154,7 @@
     (str "into " (parse table))))
 
 (defn values
-  [tokens]
+  [& tokens]
   (proxy [Directive] []
     (script []
       (str "values(" (str/join ", " (map parse tokens)) ")"))
@@ -136,6 +164,18 @@
 (defn delete
   [& tokens]
   (write-helper "delete" tokens))
+
+(defn set
+  [& tokens]
+  (proxy [Directive] []
+    (script []
+      (str "set " (->> tokens
+                          (map parse)
+                          (partition 3)
+                          (map #(str/join " " %))
+                          (str/join ", "))))
+    (parameters []
+      (->> tokens (map extract) flatten vec))))
 
 (defn update
   [& tokens]
