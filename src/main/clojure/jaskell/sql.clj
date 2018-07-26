@@ -54,6 +54,10 @@
 
 (def all :all)
 
+(def limit :limit)
+
+(def offset :offset)
+
 (defn partition-helper
   []
   (let [state (atom 0)
@@ -114,6 +118,20 @@
 (defn insert
   [& tokens]
   (write-helper "insert" tokens))
+
+(defn into
+  [table tokens]
+  (if tokens
+    (str "into " (parse table) "(" (str/join ", " (map parse tokens)) ")")
+    (str "into " (parse table))))
+
+(defn values
+  [tokens]
+  (proxy [Directive] []
+    (script []
+      (str "values(" (str/join ", " (map parse tokens)) ")"))
+    (parameters []
+      (->> tokens (map extract) flatten vec))))
 
 (defn delete
   [& tokens]
@@ -197,7 +215,3 @@
        (str (parse name) "(" (->> p (map parse) (str/join ", ")) ")"))
      (parameters []
        (->> (concat name p) (map extract) flatten vec)))))
-
-(defn paramterize
-  [^Directive script]
-  (concat (.script script) (.parameters script)))

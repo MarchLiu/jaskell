@@ -8,7 +8,9 @@
                         ["snapshots" :clojars]]
   :dependencies [[org.clojure/clojure "1.9.0"]]
   :profiles {:dev {:dependencies [[junit/junit "4.11"]
+                                  [org.clojure/java.jdbc "0.7.7"]
                                   [org.xerial/sqlite-jdbc "3.23.1"]]
+                   :source-paths ["src/main/clojure" "src/test/clojure"]
                    :java-source-paths ["src/main/java" "src/test/java"]
                    :junit ["src/test/java"]}}
   :plugins [[lein-junit "1.1.8"]]

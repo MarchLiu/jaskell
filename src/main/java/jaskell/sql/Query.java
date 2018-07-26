@@ -53,6 +53,11 @@ public abstract class Query extends Statement {
         return re;
     }
 
+    public <T> Query setParameter(Object key, T value) throws IllegalArgumentException {
+        super.setParameter(key, value);
+        return this;
+    }
+
     public ResultSet query(PreparedStatement statement) throws SQLException {
         syncParameters(statement);
         return statement.executeQuery();

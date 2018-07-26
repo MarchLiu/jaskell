@@ -27,7 +27,7 @@ public abstract class Statement implements Directive {
         return statement.execute();
     }
 
-    public <T> void setParameter(Object key, T value) throws IllegalArgumentException{
+    public <T> Statement setParameter(Object key, T value) throws IllegalArgumentException{
         var flag = false;
         for (Parameter parameter:parameters()) {
             if (Objects.equals(parameter.key(), key)) {
@@ -45,6 +45,7 @@ public abstract class Statement implements Directive {
         if(!flag){
             throw new IllegalArgumentException(String.format("parameter named %s not found", key));
         }
+        return this;
     }
 
     public void clear(PreparedStatement statement) throws SQLException {
