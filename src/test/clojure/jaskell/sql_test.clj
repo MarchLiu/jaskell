@@ -1,6 +1,8 @@
 (ns jaskell.sql-test
   (:require [clojure.test :refer :all]
-            [jaskell.sql :refer [select from where p insert into values limit returning f null] :as sql]
+            [jaskell.sql :refer [select from where p insert into values limit returning f null
+                                 left right full cross inner join on as]
+             :as sql]
             [clojure.java.jdbc :refer :all])
   (:import (jaskell.sql Statement Query)
            (java.util Optional)
@@ -67,5 +69,26 @@
                    (-> ^Query
                        (select :id from :test where :pid := 1)
                        (.scalar conn Integer)))))))
+
+(deftest join-basic-test
+  (testing "join as expected"
+    (is (= "select * from test join d on test.did = d.id"
+           (-> (select :* from :test join :d on :test.did := :d.id)
+               .script)))
+    (is (= "select test.id, d.content as category, test.content from test left join d on test.did = d.id"
+           (-> (select [:test.id :d.content as :category :test.content] from :test left join :d on :test.did := :d.id)
+               .script)))
+    (is (= "select test.id, d.content as category, test.content from test right join d on test.did = d.id"
+           (-> (select [:test.id :d.content as :category :test.content] from :test right join :d on :test.did := :d.id)
+               .script)))
+    (is (= "select test.id, d.content as category, test.content from test full join d on test.did = d.id"
+           (-> (select [:test.id :d.content as :category :test.content] from :test full join :d on :test.did := :d.id)
+               .script)))
+    (is (= "select test.id, d.content as category, test.content from test cross join d"
+           (-> (select [:test.id :d.content as :category :test.content] from :test cross join :d)
+               .script)))
+    (is (= "select test.id, d.content as category, test.content from test inner join d on test.did = d.id"
+           (-> (select [:test.id :d.content as :category :test.content] from :test inner join :d on :test.did := :d.id)
+               .script)))))
 
 (run-tests)

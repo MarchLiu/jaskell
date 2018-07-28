@@ -25,7 +25,11 @@
 
 (def inner :inner)
 
+(def outer :outer)
+
 (def on :on)
+
+(def using :using)
 
 (def end :end)
 
@@ -111,14 +115,6 @@
 (def from :from)
 
 (def where :where)
-
-(defn in
-  [& tokens]
-  (proxy [Directive] []
-    (script []
-      (str "in (" (parse-comma tokens) ")"))
-    (parameters []
-      (->> tokens (map extract) flatten vec))))
 
 (defn by
   [& tokens]
@@ -217,13 +213,35 @@
       (parameters []
         (->> tokens (map extract) flatten vec)))))
 
+(defn in
+  [& tokens]
+  (if (not-any? #(= (first tokens) %) [select delete update insert with])
+    (proxy [Directive] []
+      (script []
+        (str "in (" (->> tokens (map parse) (str/join ", ")) ")"))
+      (parameters []
+        (->> tokens (map extract) flatten vec)))
+    (let [^Query sub (apply (first tokens) (rest tokens))]
+      (proxy [Directive] []
+        (script []
+          (str "in (" (.script sub) ")"))
+        (parameters []
+          (.parameters sub))))))
+
 (defn br
   [& tokens]
-  (proxy [Directive] []
-    (script []
-      (str "(" (->> tokens (map parse) (str/join " ")) ")"))
-    (parameters []
-      (->> tokens (map extract) flatten vec))))
+  (if (not-any? #(= (first tokens) %) [select delete update insert with])
+    (proxy [Directive] []
+      (script []
+        (str "(" (->> tokens (map parse) (str/join " ")) ")"))
+      (parameters []
+        (->> tokens (map extract) flatten vec)))
+    (let [^Query sub (apply (first tokens) (rest tokens))]
+      (proxy [Directive] []
+        (script []
+          (str "(" (.script sub) ")"))
+        (parameters []
+          (.parameters sub))))))
 
 (defn t
   [^String token]

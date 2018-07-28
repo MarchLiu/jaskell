@@ -85,13 +85,19 @@ Clojure 语言中的 jaskell.sql 支持比较简单，它尽量利用java 的资
 几乎 SQL 就是形如 `(select [:a :b :c] from :table where :id := :v)` 这样的形式。
 几个例外的工具函数包含：
 
- - p 函数表示 parameter 构造一个 JDBCParametr 对象
+ - p 函数表示 parameter 构造一个 JDBCParameter 对象
  - t 函数表示 text ，会解析为一段单引号包含的文本，注意这个函数会将文本中的单引号转义
  - q 函数表示 quot ，会将内容用双引号包含起来。注意这个函数会将文本中的双引号转义
- - br 函数表示 brackets ，会构造一个 Directive ，其 script 返回的是括号包围的参数解析结果
- - f 函数表示 function ，返回函数调用。
+ - br 函数表示 brackets ，会构造一个 Directive ，其 script 返回的是括号包围的参数解析结果，
+ 需要注意的是，如果br的第一个参数是 select/insert/delete/update 中的任一个，br会将参数序列
+ 视作一个子查询来构造，并且为这个子查询加上括号
+ - br 函数表示 brackets ，会构造一个 Directive ，其 script 返回的是括号包围的，用逗号连接
+ 的参数解析结果，需要注意的是，如果br的第一个参数是 select/insert/delete/update 中的任一个，
+ in 会将参数序列视作一个子查询来构造，并且为这个子查询加上括号，这是因为，in 的右边总是一个元素
+ 可比较的集合，它要么是一个子查询，要么是用逗号列举的。
+ - f 函数表示 function ，返回函数调用
  - select 函数返回一个 Query ，将参数拼装成一条 select 查询
- - insert/delete/update 返回对应的 Statement，需要指出的是如果语句的末尾是 
+ - insert/delete/update 返回对应的 Statement，需要指出的是，如果语句的末尾是 
  `returning [...]`，得到的是一个 Query 对象
  - `(with [name0 as query0 name1 as query1...] statement)` 得到对应的 CTE 查询，递归
  查询则是 `(with recursive [name0 as query0 name1 as query1...] statement)`
