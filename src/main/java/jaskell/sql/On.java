@@ -23,4 +23,16 @@ public class On implements Directive {
         re._prefix = this;
         return re;
     }
+
+    public Conflict conflict(String names){
+        var re = new Conflict(names);
+        re._prefix = this;
+        return re;
+    }
+
+    public Conflict conflict(String ... names){
+        var re = new Conflict(names);
+        re._prefix = this;
+        return re;
+    }
 }

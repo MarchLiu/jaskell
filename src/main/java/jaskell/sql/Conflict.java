@@ -3,13 +3,37 @@ package jaskell.sql;
 import jaskell.script.Directive;
 import jaskell.script.Parameter;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Conflict implements Directive {
     Directive _prefix;
+    List<Name> _items = new ArrayList<>();
+
+    Conflict(){
+
+    }
+
+    Conflict(String names){
+        _items.addAll(Arrays.stream(
+                names.split(",")).map(String::trim).map(Name::new).collect(Collectors.toList()));
+    }
+
+    Conflict(String... names){
+        _items.addAll(Arrays.stream(names).map(Name::new).collect(Collectors.toList()));
+    }
+
     @Override
     public String script() {
-        return String.format("%s conflict", _prefix.script());
+        if(_items.isEmpty()) {
+            return String.format("%s conflict", _prefix.script());
+        } else {
+            return String.format("%s conflict (%s)",
+                    _prefix.script(),
+                    _items.stream().map(Name::script).collect(Collectors.joining(", ")));
+        }
     }
 
     @Override
