@@ -2,6 +2,7 @@ package jaskell.parsec;
 
 import java.io.EOFException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Mars Liu on 2016/9/25.

@@ -270,3 +270,13 @@
        (str (parse name) "(" (->> p (map parse) (str/join ", ")) ")"))
      (parameters []
        (->> (concat name p) (map extract) flatten vec)))))
+
+(defn t
+  [table fields]
+  (proxy [Directive] []
+    (parameters []
+      (-> (concat (extract table) (map extract fields))
+          flatten
+          vec))
+    (script []
+      (str (parse table) "(" (parse-comma fields) ")"))))

@@ -1,7 +1,7 @@
 (ns jaskell.sql-test
   (:require [clojure.test :refer :all]
             [jaskell.sql :refer [select from where p insert into values limit returning f null
-                                 left right full cross inner join on as]
+                                 left right full cross inner join on as with recursive t union]
              :as sql]
             [clojure.java.jdbc :refer :all])
   (:import (jaskell.sql Statement Query)
@@ -70,7 +70,7 @@
                        (select :id from :test where :pid := 1)
                        (.scalar conn Integer)))))))
 
-(deftest join-basic-test
+(deftest join-script-test
   (testing "join as expected"
     (is (= "select * from test join d on test.did = d.id"
            (-> (select :* from :test join :d on :test.did := :d.id)
@@ -89,6 +89,18 @@
                .script)))
     (is (= "select test.id, d.content as category, test.content from test inner join d on test.did = d.id"
            (-> (select [:test.id :d.content as :category :test.content] from :test inner join :d on :test.did := :d.id)
+               .script)))))
+
+(deftest with-script-test
+  (testing "with script"
+    (is (= "with t1 as (select n from t), t2 as (select m from t) select n * m from t1 join t2 on t1.n != t2.m"
+           (-> (with [:t1 as (select :n from :t) :t2 as (select :m from :t)]
+                     select "n * m" from :t1 join :t2 on :t1.n :!= :t2.m)
+               .script))))
+  (testing "with recursive script"
+    (is (= "with recursive t(f) as (select 1 union select f+1 from t where f < 100) select f from t"
+           (-> (with recursive [(t :t [:f]) as (select 1 union (select :f+1 from :t where :f :< 100))]
+                     select :f from :t)
                .script)))))
 
 (run-tests)
