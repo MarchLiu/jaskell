@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Into implements Directive {
+public class Into implements Directive, ThenSelect {
     Name _name;
     List<Directive> _fields = new ArrayList<>();
 
@@ -88,64 +88,4 @@ public class Into implements Directive {
         return re;
 
     }
-
-    public Into.Select select(){
-        var re = new Into.Select();
-        re._into = this;
-        return re;
-    }
-
-    public Into.Select select(String fields){
-        var re = new Into.Select(fields);
-        re._into = this;
-        return re;
-    }
-
-
-    public static class Select extends jaskell.sql.Select  {
-        Into _into;
-
-        public Select(){
-            super();
-        }
-
-        public Select(String names){
-            super(names);
-        }
-
-        public Select(String ... names){
-            super(names);
-        }
-
-        public Select(Directive ... names){
-            super(names);
-        }
-
-        @Override
-        public String script() {
-            return String.format("%s %s", _into.script(), super.script());
-        }
-
-        @Override
-        public List<jaskell.script.Parameter> parameters() {
-            var re = _into.parameters();
-            re.addAll(super.parameters());
-            return re;
-        }
-
-        public Select.From from(String name){
-            var re = new From();
-            re._from = new Name(name);
-            re._select = this;
-            return re;
-        }
-
-        public Select.From from(Directive f) {
-            var re = new From();
-            re._select = this;
-            re._from = f;
-            return re;
-        }
-    }
-
 }

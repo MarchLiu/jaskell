@@ -45,7 +45,7 @@ public class WriteTest {
 
     @Test
     public void insertTest() {
-        Statement query = insert().into(table, "content").values(p("data"));
+        Statement query = insert().into(table, "content").values(p("data")).cache();
         try(PreparedStatement statement = query.prepare(conn)){
             IntStream.range(0, 10).mapToObj(x->String.format("write %dth log", x)).forEach(log->{
                 try {

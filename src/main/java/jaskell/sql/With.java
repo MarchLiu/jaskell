@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class With extends Query {
+public class With extends Query implements ThenSelect {
     Name _name;
     List<Name> _fields = new ArrayList<>();
 
@@ -185,20 +185,20 @@ public class With extends Query {
             return re;
         }
 
-        public With.Select select(String names){
-            var re = new With.Select(names);
+        public Select select(String names){
+            var re = new Select(names);
             re._prefix = this;
             return re;
         }
 
-        public With.Select select(String... names){
-            var re = new With.Select(names);
+        public Select select(String... names){
+            var re = new Select(names);
             re._prefix = this;
             return re;
         }
 
-        public With.Select select(Directive... names){
-            var re = new With.Select(names);
+        public Select select(Directive... names){
+            var re = new Select(names);
             re._prefix = this;
             return re;
         }
@@ -227,33 +227,6 @@ public class With extends Query {
             return re;
         }
 
-    }
-
-    public static class Select extends jaskell.sql.Select {
-        Directive _prefix;
-
-        Select(String names){
-            super(names);
-        }
-
-        Select(String... names){
-            super(names);
-        }
-
-        Select(Directive... names){
-            super(names);
-        }
-        @Override
-        public String script() {
-            return String.format("%s %s", _prefix.script(), super.script());
-        }
-
-        @Override
-        public List<Parameter> parameters() {
-            var re = _prefix.parameters();
-            re.addAll(super.parameters());
-            return re;
-        }
     }
 
     public static class Insert extends jaskell.sql.Insert {

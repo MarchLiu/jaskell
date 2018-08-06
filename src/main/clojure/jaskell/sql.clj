@@ -69,8 +69,10 @@
         last (atom "")]
     (fn [token]
       (let [l @last]
-        (reset! last token)
-        (if (or (= token as) (= l as))
+        (if (and (= token all) (= l union))
+          (reset! last [:union :all])
+          (reset! last token))
+        (if (or (= token as) (= l as) (= token union) (= l union) (and (= l union) (= token all)) (= l [union all]))
           @state
           (swap! state inc))))))
 

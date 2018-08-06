@@ -4,7 +4,7 @@ import jaskell.script.Parameter;
 
 import java.util.List;
 
-public class Union extends Query {
+public class Union extends Query implements ThenSelect {
     Query _prefix;
     Query _query;
 
@@ -35,7 +35,7 @@ public class Union extends Query {
         return re;
     }
 
-    public static class All extends Union{
+    public static class All extends Union implements ThenSelect {
         @Override
         public String script() {
             return String.format("%s union all %s", _prefix.script(), _query.script());

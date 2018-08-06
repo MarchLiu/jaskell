@@ -117,20 +117,20 @@ public class SQL {
         re._right = right;
         return re;
     }
-    public static Less ls(Directive left, Directive right){
+    public static Less lt(Directive left, Directive right){
         var re = new Less();
         re._left = left;
         re._right = right;
         return re;
     }
-    public static GreateOrEqual gte(Directive left, Directive right){
+    public static GreateOrEqual ge(Directive left, Directive right){
         var re = new GreateOrEqual();
         re._left = left;
         re._right = right;
         return re;
     }
 
-    public static LessOrEqual lte(Directive left, Directive right){
+    public static LessOrEqual le(Directive left, Directive right){
         var re = new LessOrEqual();
         re._left = left;
         re._right = right;

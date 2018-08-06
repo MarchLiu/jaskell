@@ -1,7 +1,8 @@
 (ns jaskell.sql-test
   (:require [clojure.test :refer :all]
             [jaskell.sql :refer [select from where p insert into values limit returning f null
-                                 left right full cross inner join on as with recursive t union]
+                                 left right full cross inner join on as with recursive t union
+                                 br all]
              :as sql]
             [clojure.java.jdbc :refer :all])
   (:import (jaskell.sql Statement Query)
@@ -93,14 +94,34 @@
 
 (deftest with-script-test
   (testing "with script"
-    (is (= "with t1 as (select n from t), t2 as (select m from t) select n * m from t1 join t2 on t1.n != t2.m"
+    (is (= "with t1 as (select n from t), t2 as (select m from t) select m * n from t1 join t2 on t1.n != t2.m"
            (-> (with [:t1 as (select :n from :t) :t2 as (select :m from :t)]
-                     select "n * m" from :t1 join :t2 on :t1.n :!= :t2.m)
+                     select "m * n" from :t1 join :t2 on :t1.n :!= :t2.m)
                .script))))
   (testing "with recursive script"
     (is (= "with recursive t(f) as (select 1 union select f+1 from t where f < 100) select f from t"
            (-> (with recursive [(t :t [:f]) as (select 1 union (select :f+1 from :t where :f :< 100))]
                      select :f from :t)
+               .script)))
+    (is (= "with recursive t(f) as (select 1 union all select f+1 from t where f < 100) select f from t"
+           (-> (with recursive [(t :t [:f]) as (select 1 union all (select :f+1 from :t where :f :< 100))]
+                     select :f from :t)
+               .script)))
+    (is (= "with recursive t(f) as (values(1) union select f+1 from t where f < 100) select f from t"
+           (-> (with recursive [(t :t [:f]) as [(values 1) union (select :f+1 from :t where :f :< 100)]]
+                     select :f from :t)
+               .script)))
+    (is (= "with recursive t(f) as (values(1) union all select f+1 from t where f < 100) select f from t"
+           (-> (with recursive [(t :t [:f]) as [(values 1) union all (select :f+1 from :t where :f :< 100)]]
+                     select :f from :t)
                .script)))))
 
-(run-tests)
+(deftest union-script-test
+  (testing "union script"
+    (is (= "select 1 union select 2"
+           (-> (select 1 union (select 2))
+               .script))))
+  (testing "union all script"
+    (is (= "select 1 union all select 2"
+           (-> (select 1 union all (select 2))
+               .script)))))

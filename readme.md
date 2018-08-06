@@ -79,7 +79,9 @@ Clojure 语言中的 jaskell.sql 支持比较简单，它尽量利用java 的资
   - `(into :t [...])` 会被解析为 `into t(...)`，其参数被解析为一组
   - `(values ...)` 会被解析为 `values(...)`，其参数被解析为一组
   - 组中 as （等同于 :as) 及其左右的项被视为一个定义了别名的元素，
-  `[:a :b as :yet :c]` 会被解析为 `a, b as yet, c` 。
+  `[:a :b as :yet :c]` 会被解析为 `a, b as yet, c` 
+  - union 和 union all 连接的序列按照与 as 等同的规则解析，例如 
+  `[(select 1) union (select 2)]` 会被解析为 `select 1 union select 2`
  
 然后，我们将几乎所有其它元素都定义成 keyword ，就可以享受 Clojure 的便捷语法了，
 几乎 SQL 就是形如 `(select [:a :b :c] from :table where :id := :v)` 这样的形式。

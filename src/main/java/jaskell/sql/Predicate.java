@@ -95,7 +95,7 @@ public abstract class Predicate implements Directive {
         return re;
     }
 
-    public <T> Predicate ls(T value){
+    public <T> Predicate lt(T value){
         var re = new Less();
         re._left = this;
         re._right = new Literal(value);
