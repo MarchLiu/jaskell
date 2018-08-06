@@ -39,7 +39,7 @@ public class SelectTest {
         Assert.assertEquals("{} should be {}",
                 "select id, content from log where id > ?",
                 query.script());
-        Assert.assertEquals("should get frist argument named start",
+        Assert.assertEquals("should get first argument named start",
                 "start",
                 query.parameters().get(0).key());
     }
