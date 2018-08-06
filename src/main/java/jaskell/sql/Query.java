@@ -67,10 +67,11 @@ public abstract class Query extends Statement {
         try(PreparedStatement statement = conn.prepareStatement(this.script());
             ResultSet resultSet = statement.executeQuery()){
             if (resultSet.next()){
-                return Optional.of(resultSet.getObject(1));
-            } else {
-                return Optional.empty();
+                if(resultSet.getObject(1)!=null) {
+                    return Optional.of(resultSet.getObject(1));
+                }
             }
+            return Optional.empty();
         }
     }
 

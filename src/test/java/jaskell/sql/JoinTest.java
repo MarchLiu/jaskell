@@ -86,7 +86,7 @@ public class JoinTest {
     }
 
     @Test
-    public void leftJoinTest(){
+    public void leftJoinTest0(){
         Query q = select("l.id, r.id, l.content, r.content")
                 .from(n("test").as("l")
                         .left().join(n("test").as("r")).on(l("l.id=r.pid")))
@@ -101,4 +101,16 @@ public class JoinTest {
         }
     }
 
+    @Test
+    public void leftJoinTest1(){
+        Query q = select("r.id")
+                .from(n("test").as("l")
+                        .left().join(n("test").as("r")).on(l("l.id=r.pid")))
+                .where(l("r.id").isNull());
+        try{
+            Assert.assertFalse(q.scalar(conn).isPresent());
+        } catch (SQLException e) {
+            Assert.fail(e.getMessage());
+        }
+    }
 }
