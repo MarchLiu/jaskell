@@ -28,7 +28,7 @@ public abstract class Statement implements Directive {
     }
 
     public <T> Statement setParameter(Object key, T value) throws IllegalArgumentException{
-        var flag = false;
+        boolean flag = false;
         for (Parameter parameter:parameters()) {
             if (Objects.equals(parameter.key(), key)) {
                 if(parameter.valueClass().isInstance(value)) {
@@ -60,7 +60,7 @@ public abstract class Statement implements Directive {
             }
         }
         clear(statement);
-        var params = parameters();
+        List<Parameter> params = parameters();
         setOrder(params);
         for (jaskell.script.Parameter parameter: params) {
             //TODO: overload by parameter.valueClass
@@ -76,19 +76,19 @@ public abstract class Statement implements Directive {
     }
 
     public Returning returning(String names){
-        var re =  new Returning(names);
+        Returning re =  new Returning(names);
         re._prefix = this;
         return re;
     }
 
     public Returning returning(String ... names){
-        var re =  new Returning(names);
+        Returning re =  new Returning(names);
         re._prefix = this;
         return re;
     }
 
     public Returning returning(Directive names){
-        var re =  new Returning(names);
+        Returning re =  new Returning(names);
         re._prefix = this;
         return re;
     }

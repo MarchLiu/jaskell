@@ -1,6 +1,7 @@
 package jaskell.sql;
 
 import jaskell.script.Directive;
+import jaskell.script.Parameter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ class Join implements Directive {
     Directive _join;
 
     public On on(Predicate _on){
-        var re = new On();
+        On re = new On();
         re._join = this;
         re._on.add(_on);
         return re;
@@ -24,7 +25,7 @@ class Join implements Directive {
 
     @Override
     public List<jaskell.script.Parameter> parameters() {
-        var re = _prefix.parameters();
+        List<Parameter> re = _prefix.parameters();
         re.addAll(_join.parameters());
         return re;
     }
@@ -39,7 +40,7 @@ class Join implements Directive {
         }
 
         public Join join(Directive other){
-            var re = new Join();
+            Join re = new Join();
             re._prefix = this;
             re._join = other;
             return re;
@@ -53,19 +54,19 @@ class Join implements Directive {
 
         @Override
         public List<jaskell.script.Parameter> parameters() {
-            var re = _join.parameters();
+            List<Parameter> re = _join.parameters();
             _on.forEach(item->re.addAll(item.parameters()));
             return re;
         }
 
         public Group group() {
-            var re = new Group();
+            Group re = new Group();
             re._prefix = this;
             return re;
         }
 
         public Order order() {
-            var re = new Order();
+            Order re = new Order();
             re._prefix = this;
             return re;
         }

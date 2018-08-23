@@ -2,6 +2,7 @@ package jaskell.sql;
 
 
 import jaskell.script.Directive;
+import jaskell.script.Parameter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,13 +36,13 @@ public class Values extends Statement {
 
     @Override
     public List<jaskell.script.Parameter> parameters() {
-        var re =  _insert.parameters();
+        List<Parameter> re =  _insert.parameters();
         _fields.forEach(field->re.addAll(field.parameters()));
         return re;
     }
 
     public On on(){
-        var re = new On();
+        On re = new On();
         re._prefix = this;
         return re;
     }

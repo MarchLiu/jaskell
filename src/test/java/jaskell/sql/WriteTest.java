@@ -7,6 +7,7 @@ import org.junit.runners.MethodSorters;
 
 import java.sql.*;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.IntStream;
@@ -68,9 +69,12 @@ public class WriteTest {
         AtomicLong id = new AtomicLong();
         Query findIdQuery = select(max(n("id")).as("id")).from(table);
         try{
-            findIdQuery.scalar(conn, Integer.class).ifPresentOrElse(
-                    id::set,
-                    () -> System.out.println("data not found"));
+            Optional<Integer> re = findIdQuery.scalar(conn, Integer.class);
+            if(re.isPresent()) {
+                id.set(re.get());
+            }else{
+                System.out.println("data not found");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -81,9 +85,12 @@ public class WriteTest {
         statement.execute(conn);
 
         Query query = select("content").from(table).where(l("id").eq(id.get()));
-        query.scalar(conn, String.class).ifPresentOrElse(
-                v->Assert.assertEquals("rewritten",v),
-                ()-> Assert.fail("data updated not found"));
+        Optional re = query.scalar(conn, String.class);
+        if (re.isPresent()) {
+            Assert.assertEquals("rewritten", re.get());
+        }else{
+            Assert.fail("data updated not found");
+        }
     }
 
     @Test

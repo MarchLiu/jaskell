@@ -1,136 +1,137 @@
 package jaskell.sql;
 
+import jaskell.parsec.Eq;
 import jaskell.script.Directive;
 import org.w3c.dom.ranges.DocumentRange;
 
 public abstract class Predicate implements Directive {
     public Predicate and(Predicate predicate){
-        var re = new And();
+        And re = new And();
         re._left = this;
         re._right = predicate;
         return re;
     }
 
     public Predicate or(Predicate predicate){
-        var re = new Or();
+        Or re = new Or();
         re._left = this;
         re._right = predicate;
         return re;
     }
 
     public Predicate eq(Directive predicate){
-        var re = new Equal();
+        Equal re = new Equal();
         re._left = this;
         re._right = predicate;
         return re;
     }
 
     public Predicate ne(Directive predicate){
-        var re = new NotEqual();
+        NotEqual re = new NotEqual();
         re._left = this;
         re._right = predicate;
         return re;
     }
 
     public Predicate gt(Directive predicate){
-        var re = new Great();
+        Great re = new Great();
         re._left = this;
         re._right = predicate;
         return re;
     }
 
     public Predicate ls(Directive predicate){
-        var re = new Less();
+        Less re = new Less();
         re._left = this;
         re._right = predicate;
         return re;
     }
 
     public Predicate gte(Directive predicate){
-        var re = new GreateOrEqual();
+        GreateOrEqual re = new GreateOrEqual();
         re._left = this;
         re._right = predicate;
         return re;
     }
 
-    public Predicate lse(Directive predicate){
-        var re = new LessOrEqual();
+    public Predicate lte(Directive predicate){
+        LessOrEqual re = new LessOrEqual();
         re._left = this;
         re._right = predicate;
         return re;
     }
 
     public Predicate like(Directive predicate){
-        var re = new LessOrEqual();
+        Like re = new Like();
         re._left = this;
         re._right = predicate;
         return re;
     }
 
     public <T> Predicate or(T value){
-        var re = new Or();
+        Or re = new Or();
         re._left = this;
         re._right = new Literal(value);
         return re;
     }
 
     public <T> Predicate eq(T value){
-        var re = new Equal();
+        Equal re = new Equal();
         re._left = this;
         re._right = new Literal(value);
         return re;
     }
 
     public <T> Predicate ne(T value){
-        var re = new NotEqual();
+        NotEqual re = new NotEqual();
         re._left = this;
         re._right = new Literal(value);
         return re;
     }
 
     public <T> Predicate gt(T value){
-        var re = new Great();
+        Great re = new Great();
         re._left = this;
         re._right = new Literal(value);
         return re;
     }
 
     public <T> Predicate lt(T value){
-        var re = new Less();
+        Less re = new Less();
         re._left = this;
         re._right = new Literal(value);
         return re;
     }
 
     public <T> Predicate gte(T value){
-        var re = new GreateOrEqual();
+        GreateOrEqual re = new GreateOrEqual();
         re._left = this;
         re._right = new Literal(value);
         return re;
     }
 
-    public <T> Predicate lse(T value){
-        var re = new LessOrEqual();
+    public <T> Predicate lte(T value){
+        LessOrEqual re = new LessOrEqual();
         re._left = this;
         re._right = new Literal(value);
         return re;
     }
 
     public <T> Predicate like(T value){
-        var re = new LessOrEqual();
+        Like re = new Like();
         re._left = this;
         re._right = new Literal(value);
         return re;
     }
 
     public Predicate isNull(){
-        var re = new IsNull();
+        IsNull re = new IsNull();
         re._prefix = this;
         return re;
     }
 
     public Predicate isNotNull(){
-        var re = new IsNotNull();
+        IsNotNull re = new IsNotNull();
         re._prefix = this;
         return re;
     }

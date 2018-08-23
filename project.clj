@@ -17,5 +17,5 @@
   :java-source-paths ["src/main/java"]
   :source-paths ["src/main/clojure" "src/main/java"]
   :test-paths ["src/test/clojure" "src/test/java"]
-  :javac-options ["-target" "1.10" "-source" "1.10" "-Xlint:unchecked" "-Xlint:varargs"]
+  :javac-options ["-target" "1.8" "-source" "1.8" "-Xlint:unchecked" "-Xlint:varargs"]
   :junit ["src/test/java"])

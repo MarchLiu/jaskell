@@ -47,25 +47,25 @@ public class Delete implements Directive {
         }
 
         public Using using(String names) {
-            var re  = new Using(names);
+            Using re  = new Using(names);
             re._prefix = this;
             return re;
         }
 
         public Using using(String... names) {
-            var re  = new Using(names);
+            Using re  = new Using(names);
             re._prefix = this;
             return re;
         }
 
         public Using using(Directive... names) {
-            var re  = new Using(names);
+            Using re  = new Using(names);
             re._prefix = this;
             return re;
         }
 
         public Delete.Where where(Predicate predicate){
-            var re = new Delete.Where();
+            Where re = new Delete.Where();
             re._prefix = this;
             re._predicate = predicate;
             return re;
@@ -84,25 +84,25 @@ public class Delete implements Directive {
 
         @Override
         public List<Parameter> parameters() {
-            var re = _prefix.parameters();
+            List<Parameter> re = _prefix.parameters();
             re.addAll(_predicate.parameters());
             return re;
         }
 
         public Returning returning(String names){
-            var re = new Returning(names);
+            Returning re = new Returning(names);
             re._prefix = this;
             return re;
         }
 
         public Returning returning(String... names){
-            var re = new Returning(names);
+            Returning re = new Returning(names);
             re._prefix = this;
             return re;
         }
 
         public Returning returning(Directive... names){
-            var re = new Returning(names);
+            Returning re = new Returning(names);
             re._prefix = this;
             return re;
         }

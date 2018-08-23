@@ -53,14 +53,14 @@ public class Select extends Query {
     }
 
     public From from(String name){
-        var re = new From();
+        From re = new From();
         re._from = new Name(name);
         re._select = this;
         return re;
     }
 
     public From from(Directive f) {
-        var re = new From();
+        From re = new From();
         re._select = this;
         re._from = f;
         return re;
@@ -103,57 +103,57 @@ public class Select extends Query {
         }
 
         public Join join(Directive other){
-            var re = new Join();
+            Join re = new Join();
             re._prefix = this;
             re._join = other;
             return re;
         }
 
         public Left left(){
-            var re = new Left();
+            Left re = new Left();
             re._prefix = this;
             return re;
         }
 
         public Right right(){
-            var re = new Right();
+            Right re = new Right();
             re._prefix = this;
             return re;
         }
 
         public Full full(){
-            var re = new Full();
+            Full re = new Full();
             re._prefix = this;
             return re;
         }
 
         public Inner inner(){
-            var re = new Inner();
+            Inner re = new Inner();
             re._prefix = this;
             return re;
         }
 
         public Cross cross(){
-            var re = new Cross();
+            Cross re = new Cross();
             re._prefix = this;
             return re;
         }
 
         public Where where(Predicate predicate){
-            var re = new Where(predicate);
+            Where re = new Where(predicate);
             re._prefix = this;
             re._predicate = predicate;
             return re;
         }
 
         public Group group() {
-            var re = new Group();
+            Group re = new Group();
             re._prefix = this;
             return re;
         }
 
         public Order order() {
-            var re = new Order();
+            Order re = new Order();
             re._prefix = this;
             return re;
         }

@@ -18,13 +18,13 @@ public class Update implements Directive {
     }
 
     public Update.Set set(String field, Directive value){
-        var re = new Update.Set(field, value);
+        Set re = new Update.Set(field, value);
         re._prefix = this;
         return re;
     }
 
     public Update.Set set(Directive field, Directive value){
-        var re = new Update.Set(field, value);
+        Set re = new Update.Set(field, value);
         re._prefix = this;
         return re;
     }
@@ -70,31 +70,31 @@ public class Update implements Directive {
 
         @Override
         public List<Parameter> parameters() {
-            var re = _prefix.parameters();
+            List<Parameter> re = _prefix.parameters();
             _sets.forEach(item -> re.addAll(item.parameters()));
             return re;
         }
 
         public Using using(String names){
-            var re = new Using(names);
+            Using re = new Using(names);
             re._prefix = this;
             return re;
         }
 
         public Using using(String... names){
-            var re = new Using(names);
+            Using re = new Using(names);
             re._prefix = this;
             return re;
         }
 
         public Using using(Directive ... names){
-            var re = new Using(names);
+            Using re = new Using(names);
             re._prefix = this;
             return re;
         }
 
         public Where where(Predicate predicate){
-            var re = new Where(predicate);
+            Where re = new Where(predicate);
             re._prefix = this;
             return re;
         }
@@ -121,7 +121,7 @@ public class Update implements Directive {
 
         @Override
         public List<Parameter> parameters() {
-            var re = _field.parameters();
+            List<Parameter> re = _field.parameters();
             re.addAll(_value.parameters());
             return re;
         }

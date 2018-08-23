@@ -1,5 +1,6 @@
 package jaskell.sql;
 
+import jaskell.parsec.Option;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -8,6 +9,7 @@ import org.junit.Test;
 import javax.print.attribute.standard.PresentationDirection;
 import javax.sql.RowSet;
 import java.sql.*;
+import java.util.Optional;
 
 import static jaskell.sql.SQL.*;
 
@@ -60,7 +62,7 @@ public class JoinTest {
     public void initTest(){
         try {
             Query q = select(count()).from("test");
-            var c = q.scalar(conn, Integer.class);
+            Optional<Integer> c = q.scalar(conn, Integer.class);
             Assert.assertTrue(c.isPresent());
             Assert.assertEquals("expect 10 lines of data", 10, c.get().intValue());
         } catch (SQLException e) {

@@ -23,7 +23,7 @@ public class Offset extends Query {
 
     @Override
     public List<Parameter> parameters() {
-        var re =  _prefix.parameters();
+        List<Parameter> re =  _prefix.parameters();
         re.addAll(_offset.parameters());
         return re;
     }

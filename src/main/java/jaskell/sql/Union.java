@@ -17,7 +17,7 @@ public class Union extends Query implements ThenSelect {
     }
 
     public Union.All all(Query query){
-        var re = new Union.All();
+        All re = new Union.All();
         re._prefix = this._prefix;
         re._query = query;
         return re;
@@ -30,7 +30,7 @@ public class Union extends Query implements ThenSelect {
 
     @Override
     public List<Parameter> parameters() {
-        var re = _prefix.parameters();
+        List<Parameter> re = _prefix.parameters();
         re.addAll(_query.parameters());
         return re;
     }

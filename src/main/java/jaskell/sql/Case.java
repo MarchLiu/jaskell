@@ -49,13 +49,13 @@ public class Case implements Directive {
 
         @Override
         public List<Parameter> parameters() {
-            var re = _prefix.parameters();
+            List<Parameter> re = _prefix.parameters();
             re.addAll(_cond.parameters());
             return re;
         }
 
         public Then then(Directive expr){
-            var re = new Then(expr);
+            Then re = new Then(expr);
             re._prefix = this;
             return re;
         }
@@ -77,25 +77,25 @@ public class Case implements Directive {
 
         @Override
         public List<Parameter> parameters() {
-            var re = _prefix.parameters();
+            List<Parameter> re = _prefix.parameters();
             re.addAll(_expr.parameters());
             return re;
         }
 
         public When when(Predicate predicate){
-            var re = new When(predicate);
+            When re = new When(predicate);
             re._prefix = this;
             return re;
         }
 
         public End end(){
-            var re = new End();
+            End re = new End();
             re._prefix = this;
             return re;
         }
 
         public Else _else(Directive expr){
-            var re = new Else(expr);
+            Else re = new Else(expr);
             re._prefix = this;
             return re;
         }
@@ -116,13 +116,13 @@ public class Case implements Directive {
 
         @Override
         public List<Parameter> parameters() {
-            var re = _prefix.parameters();
+            List<Parameter> re = _prefix.parameters();
             re.addAll(_expr.parameters());
             return re;
         }
 
         public End end(){
-            var re = new End();
+            End re = new End();
             re._prefix = this;
             return re;
         }
@@ -142,13 +142,13 @@ public class Case implements Directive {
         }
 
         public Alias as(String name){
-            var re = new Alias(name);
+            Alias re = new Alias(name);
             re._prefix = this;
             return re;
         }
 
         public Alias as(Name name){
-            var re = new Alias(name.name());
+            Alias re = new Alias(name.name());
             re._prefix = this;
             return re;
         }
@@ -173,7 +173,7 @@ public class Case implements Directive {
 
         @Override
         public List<Parameter> parameters() {
-            var re = _prefix.parameters();
+            List<Parameter> re = _prefix.parameters();
             re.addAll(_name.parameters());
             return re;
         }

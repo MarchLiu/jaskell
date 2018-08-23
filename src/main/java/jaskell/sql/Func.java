@@ -25,7 +25,7 @@ public class Func extends Literal {
 
     @Override
     public List<Parameter> parameters() {
-        var re = new ArrayList<Parameter>();
+        List<Parameter> re = new ArrayList<Parameter>();
         _args.forEach(p->re.addAll(p.parameters()));
         return re;
     }

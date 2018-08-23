@@ -19,25 +19,25 @@ public class Group implements Directive {
     }
 
     public jaskell.sql.Group.By by(String names){
-        var re =  new jaskell.sql.Group.By(names);
+        By re =  new jaskell.sql.Group.By(names);
         re._prefix = this;
         return re;
     }
 
     public jaskell.sql.Group.By by(String... names){
-        var re = new jaskell.sql.Group.By(names);
+        By re = new jaskell.sql.Group.By(names);
         re._prefix = this;
         return re;
     }
 
     public jaskell.sql.Group.By by(Directive ... names){
-        var re = new jaskell.sql.Group.By(names);
+        By re = new jaskell.sql.Group.By(names);
         re._prefix = this;
         return re;
     }
 
     public Order order() {
-        var re = new Order();
+        Order re = new Order();
         re._prefix = this;
         return re;
     }
@@ -56,7 +56,7 @@ public class Group implements Directive {
         }
 
         public Having having(Predicate predicate){
-            var re = new Having(predicate);
+            Having re = new Having(predicate);
             re._by = this;
             return re;
         }

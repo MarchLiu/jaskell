@@ -22,14 +22,14 @@ public class Having extends Statement {
 
     @Override
     public List<Parameter> parameters() {
-        var re = new ArrayList<Parameter>();
+        List<Parameter> re = new ArrayList<Parameter>();
         re.addAll(_by.parameters());
         re.addAll(_predicate.parameters());
         return re;
     }
 
     public Order order(){
-        var re = new Order();
+        Order re = new Order();
         re._prefix = this;
         return re;
     }

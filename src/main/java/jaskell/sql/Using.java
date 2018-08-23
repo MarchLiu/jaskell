@@ -24,7 +24,7 @@ public class Using implements Directive {
     }
 
     public Using.Where where(Predicate predicate){
-        var re = new Where(predicate);
+        Where re = new Where(predicate);
         re._from = this;
         return re;
     }

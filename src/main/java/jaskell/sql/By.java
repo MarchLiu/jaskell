@@ -49,7 +49,7 @@ public class By extends Select.From {
 
     @Override
     public List<Parameter> parameters() {
-        var re = _prefix.parameters();
+        List<Parameter> re = _prefix.parameters();
         _fields.forEach(item->re.addAll(item.parameters()));
         return re;
     }

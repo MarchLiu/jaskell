@@ -61,7 +61,7 @@ public class Returning extends Query {
 
     @Override
     public List<Parameter> parameters() {
-        var re = _prefix.parameters();
+        List<Parameter> re = _prefix.parameters();
         _names.forEach(field->re.addAll(field.parameters()));
         return re;
     }

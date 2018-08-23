@@ -9,7 +9,7 @@ public class Left implements Directive {
     Directive _prefix;
 
     public Join join(Directive other){
-        var re = new Join();
+        Join re = new Join();
         re._prefix = this;
         re._join = other;
         return re;

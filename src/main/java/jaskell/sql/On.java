@@ -19,19 +19,19 @@ public class On implements Directive {
     }
 
     public Conflict conflict(){
-        var re = new Conflict();
+        Conflict re = new Conflict();
         re._prefix = this;
         return re;
     }
 
     public Conflict conflict(String names){
-        var re = new Conflict(names);
+        Conflict re = new Conflict(names);
         re._prefix = this;
         return re;
     }
 
     public Conflict conflict(String ... names){
-        var re = new Conflict(names);
+        Conflict re = new Conflict(names);
         re._prefix = this;
         return re;
     }

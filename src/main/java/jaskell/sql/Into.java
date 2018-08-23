@@ -65,25 +65,25 @@ public class Into implements Directive, ThenSelect {
 
     @Override
     public List<Parameter> parameters() {
-        var re = new ArrayList<Parameter>();
+        List<Parameter> re = new ArrayList<Parameter>();
         _fields.forEach(item->re.addAll(item.parameters()));
         return re;
     }
 
     public Values values(String vs) {
-        var re = new Values(vs);
+        Values re = new Values(vs);
         re._insert = this;
         return re;
     }
 
     public Values values(String ... vs) {
-        var re = new Values(vs);
+        Values re = new Values(vs);
         re._insert = this;
         return re;
     }
 
     public Values values(Directive ... directives) {
-        var re = new Values(directives);
+        Values re = new Values(directives);
         re._insert = this;
         return re;
 

@@ -42,25 +42,25 @@ public class Conflict implements Directive {
     }
 
     public Do do_() {
-        var re = new Do();
+        Do re = new Do();
         re._prefix = this;
         return re;
     }
 
     public Conflict.On on(){
-        var re = new On();
+        On re = new On();
         re._prefix = this;
         return re;
     }
 
     public Where where(String name){
-        var re = new Where(name);
+        Where re = new Where(name);
         re._prefix = this;
         return re;
     }
 
     public Where where(Name name){
-        var re = new Where(name);
+        Where re = new Where(name);
         re._prefix = this;
         return re;
     }
@@ -79,13 +79,13 @@ public class Conflict implements Directive {
         }
 
         public Constraint constraint(String name){
-            var re = new Constraint(name);
+            Constraint re = new Constraint(name);
             re._prefix = this;
             return re;
         }
 
         public Constraint constraint(Literal name){
-            var re = new Constraint(name);
+            Constraint re = new Constraint(name);
             re._prefix = this;
             return re;
         }
@@ -114,7 +114,7 @@ public class Conflict implements Directive {
         }
 
         public Do do_(){
-            var re = new Do();
+            Do re = new Do();
             re._prefix = this;
             return re;
         }
@@ -141,7 +141,7 @@ public class Conflict implements Directive {
         }
 
         public Do do_() {
-            var re = new Do();
+            Do re = new Do();
             re._prefix = this;
             return re;
         }

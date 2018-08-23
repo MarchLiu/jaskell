@@ -72,7 +72,7 @@ public class SQL {
     }
 
     public static Predicate br(Predicate predicate){
-        var re = new Brackets();
+        Brackets re = new Brackets();
         re._segment = predicate;
         return re;
     }
@@ -94,57 +94,57 @@ public class SQL {
     }
 
     public static And and(Directive left, Directive right){
-        var re = new And();
+        And re = new And();
         re._left = left;
         re._right = right;
         return re;
     }
     public static Or or(Directive left, Directive right){
-        var re = new Or();
+        Or re = new Or();
         re._left = left;
         re._right = right;
         return re;
     }
     public static Equal eq(Directive left, Directive right){
-        var re = new Equal();
+        Equal re = new Equal();
         re._left = left;
         re._right = right;
         return re;
     }
     public static Great gt(Directive left, Directive right){
-        var re = new Great();
+        Great re = new Great();
         re._left = left;
         re._right = right;
         return re;
     }
     public static Less lt(Directive left, Directive right){
-        var re = new Less();
+        Less re = new Less();
         re._left = left;
         re._right = right;
         return re;
     }
     public static GreateOrEqual ge(Directive left, Directive right){
-        var re = new GreateOrEqual();
+        GreateOrEqual re = new GreateOrEqual();
         re._left = left;
         re._right = right;
         return re;
     }
 
     public static LessOrEqual le(Directive left, Directive right){
-        var re = new LessOrEqual();
+        LessOrEqual re = new LessOrEqual();
         re._left = left;
         re._right = right;
         return re;
     }
     public static NotEqual ne(Directive left, Directive right){
-        var re = new NotEqual();
+        NotEqual re = new NotEqual();
         re._left = left;
         re._right = right;
         return re;
     }
 
     public static Like like(Directive left, Directive right){
-        var re = new Like();
+        Like re = new Like();
         re._left = left;
         re._right = right;
         return re;

@@ -48,20 +48,20 @@ public interface ThenSelect {
 
         @Override
         public List<Parameter> parameters() {
-            var re = _prefix.parameters();
+            List<Parameter> re = _prefix.parameters();
             re.addAll(super.parameters());
             return re;
         }
 
         public Into.Select.From from(String name){
-            var re = new From();
+            From re = new From();
             re._from = new Name(name);
             re._select = this;
             return re;
         }
 
         public Into.Select.From from(Directive f) {
-            var re = new From();
+            From re = new From();
             re._select = this;
             re._from = f;
             return re;

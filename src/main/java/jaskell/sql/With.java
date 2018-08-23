@@ -54,13 +54,13 @@ public class With extends Query implements ThenSelect {
     }
 
     public As as(Query query){
-        var re =  new As(query);
+        As re =  new As(query);
         re._prefix = this;
         return re;
     }
 
     Recursive recursive(){
-        var re = new Recursive();
+        Recursive re = new Recursive();
         re._prefix = this;
         return re;
     }
@@ -124,105 +124,105 @@ public class With extends Query implements ThenSelect {
 
         @Override
         public List<Parameter> parameters() {
-            var re = _prefix.parameters();
+            List<Parameter> re = _prefix.parameters();
             re.addAll(_query.parameters());
             return re;
         }
 
         public CommonTableExpression cte(String name){
-            var re = new CommonTableExpression(name);
+            CommonTableExpression re = new CommonTableExpression(name);
             re._prefix = this;
             return re;
         }
 
         public CommonTableExpression cte(Name name){
-            var re = new CommonTableExpression(name);
+            CommonTableExpression re = new CommonTableExpression(name);
             re._prefix = this;
             return re;
         }
 
 
         public CommonTableExpression cte(String name, String fs){
-            var re = new CommonTableExpression(name, fs);
+            CommonTableExpression re = new CommonTableExpression(name, fs);
             re._prefix = this;
             return re;
         }
 
         public CommonTableExpression cte(Name name, String fs){
-            var re = new CommonTableExpression(name, fs);
+            CommonTableExpression re = new CommonTableExpression(name, fs);
             re._prefix = this;
             return re;
         }
 
         public CommonTableExpression cte(String name, String ... fs){
-            var re = new CommonTableExpression(name, fs);
+            CommonTableExpression re = new CommonTableExpression(name, fs);
             re._prefix = this;
             return re;
         }
 
         public CommonTableExpression cte(Name name, String ... fs){
-            var re = new CommonTableExpression(name, fs);
+            CommonTableExpression re = new CommonTableExpression(name, fs);
             re._prefix = this;
             return re;
         }
 
         public CommonTableExpression cte(String name, Name ... fs){
-            var re = new CommonTableExpression(name, fs);
+            CommonTableExpression re = new CommonTableExpression(name, fs);
             re._prefix = this;
             return re;
         }
 
         public CommonTableExpression cte(Name name, Name ... fs){
-            var re = new CommonTableExpression(name, fs);
+            CommonTableExpression re = new CommonTableExpression(name, fs);
             re._prefix = this;
             return re;
         }
 
         public CommonTableQuery query(Query query){
-            var re = new CommonTableQuery();
+            CommonTableQuery re = new CommonTableQuery();
             re._prefix = this;
             re._query = query;
             return re;
         }
 
         public Select select(String names){
-            var re = new Select(names);
+            Select re = new Select(names);
             re._prefix = this;
             return re;
         }
 
         public Select select(String... names){
-            var re = new Select(names);
+            Select re = new Select(names);
             re._prefix = this;
             return re;
         }
 
         public Select select(Directive... names){
-            var re = new Select(names);
+            Select re = new Select(names);
             re._prefix = this;
             return re;
         }
 
         public With.Insert insert() {
-            var re = new With.Insert();
+            Insert re = new With.Insert();
             re._prefix = this;
             return re;
         }
 
         public With.Update update(String name) {
-            var re = new With.Update(name);
+            Update re = new With.Update(name);
             re._prefix = this;
             return re;
         }
 
         public With.Update update(Name name) {
-            var re = new With.Update(name);
+            Update re = new With.Update(name);
             re._prefix = this;
             return re;
         }
 
         public With.Delete delete() {
-            var re = new With.Delete();
+            Delete re = new With.Delete();
             re._prefix = this;
             return re;
         }
@@ -239,7 +239,7 @@ public class With extends Query implements ThenSelect {
 
         @Override
         public List<Parameter> parameters() {
-            var re = _prefix.parameters();
+            List<Parameter> re = _prefix.parameters();
             re.addAll(super.parameters());
             return re;
         }
@@ -255,7 +255,7 @@ public class With extends Query implements ThenSelect {
 
         @Override
         public List<Parameter> parameters() {
-            var re = _prefix.parameters();
+            List<Parameter> re = _prefix.parameters();
             re.addAll(super.parameters());
             return re;
         }
@@ -280,7 +280,7 @@ public class With extends Query implements ThenSelect {
 
         @Override
         public List<Parameter> parameters() {
-            var re = _prefix.parameters();
+            List<Parameter> re = _prefix.parameters();
             re.addAll(super.parameters());
             return re;
         }
@@ -292,7 +292,7 @@ public class With extends Query implements ThenSelect {
         List<Name> _fields = new ArrayList<>();
 
         public As as(Query query){
-            var re =  new As(query);
+            As re =  new As(query);
             re._prefix = this;
             return re;
         }
@@ -357,7 +357,7 @@ public class With extends Query implements ThenSelect {
 
         @Override
         public List<Parameter> parameters() {
-            var re = _prefix.parameters();
+            List<Parameter> re = _prefix.parameters();
             re.addAll(_query.parameters());
             return re;
         }

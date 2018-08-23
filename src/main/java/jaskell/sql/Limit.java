@@ -17,13 +17,13 @@ public class Limit extends Query {
     }
 
     public Offset offset(int o){
-        var re = new Offset(o);
+        Offset re = new Offset(o);
         re._prefix = this;
         return re;
     }
 
     public Offset offset(Directive o){
-        var re = new Offset(o);
+        Offset re = new Offset(o);
         re._prefix = this;
         return re;
     }
@@ -35,7 +35,7 @@ public class Limit extends Query {
 
     @Override
     public List<Parameter> parameters() {
-        var re =  _prefix.parameters();
+        List<Parameter> re =  _prefix.parameters();
         re.addAll(_limit.parameters());
         return re;
     }

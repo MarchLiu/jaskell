@@ -19,19 +19,19 @@ public class Order implements Directive {
     }
 
     public jaskell.sql.Order.By by(String names){
-        var re =  new jaskell.sql.Order.By(names);
+        By re =  new jaskell.sql.Order.By(names);
         re._prefix = this;
         return re;
     }
 
     public jaskell.sql.Order.By by(String... names){
-        var re = new jaskell.sql.Order.By(names);
+        By re = new jaskell.sql.Order.By(names);
         re._prefix = this;
         return re;
     }
 
     public jaskell.sql.Order.By by(Directive ... names){
-        var re = new jaskell.sql.Order.By(names);
+        By re = new jaskell.sql.Order.By(names);
         re._prefix = this;
         return re;
     }

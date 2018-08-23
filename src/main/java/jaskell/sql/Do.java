@@ -19,13 +19,13 @@ public class Do implements Directive {
     }
 
     public Nothing nothing(){
-        var re = new Nothing();
+        Nothing re = new Nothing();
         re._prefix = this;
         return re;
     }
 
     public Update update(){
-        var re = new Update();
+        Update re = new Update();
         re._prefix = this;
         return re;
     }
@@ -44,13 +44,13 @@ public class Do implements Directive {
         }
 
         public jaskell.sql.Update.Set set(String field, Directive value){
-            var re = new jaskell.sql.Update.Set(field, value);
+            jaskell.sql.Update.Set re = new jaskell.sql.Update.Set(field, value);
             re._prefix = this;
             return re;
         }
 
         public jaskell.sql.Update.Set set(Directive field, Directive value){
-            var re = new jaskell.sql.Update.Set(field, value);
+            jaskell.sql.Update.Set re = new jaskell.sql.Update.Set(field, value);
             re._prefix = this;
             return re;
         }
