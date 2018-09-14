@@ -5,21 +5,29 @@ import jaskell.script.Parameter;
 
 import java.util.List;
 
-public interface ThenSelect {
+public interface ThenSelect extends Directive {
     default Select select(){
-        return new Select();
+        Select re = new Select();
+        re._prefix = this;
+        return re;
     }
 
     default Select select(String names) {
-        return new Select(names);
+        Select re = new Select(names);
+        re._prefix = this;
+        return re;
     }
 
     default Select select(String ... names) {
-        return new Select(names);
+        Select re = new Select(names);
+        re._prefix = this;
+        return re;
     }
 
     default Select select(Directive ... names) {
-        return new Select(names);
+        Select re = new Select(names);
+        re._prefix = this;
+        return re;
     }
 
     class Select extends jaskell.sql.Select  {

@@ -9,26 +9,27 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Into implements Directive, ThenSelect {
+    Directive _prefix;
     Name _name;
     List<Directive> _fields = new ArrayList<>();
 
-    public Into(String table){
+    Into(String table){
         _name = new Name(table);
     }
 
-    public Into(String table, String fields){
+    Into(String table, String fields){
         _name = new Name(table);
         _fields.addAll(
                 Arrays.stream(fields.split(",")).map(String::trim).map(Name::new).collect(Collectors.toList()));
     }
 
-    public Into(String table, String ... fields){
+    Into(String table, String ... fields){
         _name = new Name(table);
         _fields.addAll(
                 Arrays.stream(fields).map(String::trim).map(Name::new).collect(Collectors.toList()));
     }
 
-    public Into(String table, Directive ... fields){
+    Into(String table, Directive ... fields){
         _name = new Name(table);
         _fields.addAll(Arrays.asList(fields));
     }
@@ -58,14 +59,15 @@ public class Into implements Directive, ThenSelect {
 
     @Override
     public String script() {
-        return String.format("insert into %s(%s)",
+        return String.format("%s into %s(%s)",
+                _prefix.script(),
                 _name.script(),
                 _fields.stream().map(Directive::script).collect(Collectors.joining(", ")));
     }
 
     @Override
     public List<Parameter> parameters() {
-        List<Parameter> re = new ArrayList<Parameter>();
+        List<Parameter> re = new ArrayList<>(_prefix.parameters());
         _fields.forEach(item->re.addAll(item.parameters()));
         return re;
     }

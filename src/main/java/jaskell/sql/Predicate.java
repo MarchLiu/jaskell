@@ -71,56 +71,56 @@ public abstract class Predicate implements Directive {
     public <T> Predicate or(T value){
         Or re = new Or();
         re._left = this;
-        re._right = new Literal(value);
+        re._right = pure(value);
         return re;
     }
 
     public <T> Predicate eq(T value){
         Equal re = new Equal();
         re._left = this;
-        re._right = new Literal(value);
+        re._right = pure(value);
         return re;
     }
 
     public <T> Predicate ne(T value){
         NotEqual re = new NotEqual();
         re._left = this;
-        re._right = new Literal(value);
+        re._right = pure(value);
         return re;
     }
 
     public <T> Predicate gt(T value){
         Great re = new Great();
         re._left = this;
-        re._right = new Literal(value);
+        re._right = pure(value);
         return re;
     }
 
     public <T> Predicate lt(T value){
         Less re = new Less();
         re._left = this;
-        re._right = new Literal(value);
+        re._right = pure(value);
         return re;
     }
 
     public <T> Predicate gte(T value){
         GreateOrEqual re = new GreateOrEqual();
         re._left = this;
-        re._right = new Literal(value);
+        re._right = pure(value);
         return re;
     }
 
     public <T> Predicate lte(T value){
         LessOrEqual re = new LessOrEqual();
         re._left = this;
-        re._right = new Literal(value);
+        re._right = pure(value);
         return re;
     }
 
     public <T> Predicate like(T value){
         Like re = new Like();
         re._left = this;
-        re._right = new Literal(value);
+        re._right = pure(value);
         return re;
     }
 
@@ -134,5 +134,13 @@ public abstract class Predicate implements Directive {
         IsNotNull re = new IsNotNull();
         re._prefix = this;
         return re;
+    }
+
+    private <T> Directive pure(T value){
+        if(value instanceof Directive){
+            return (Directive) value;
+        }else {
+            return new Literal(value);
+        }
     }
 }

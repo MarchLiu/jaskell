@@ -18,18 +18,26 @@ public class Insert implements Directive {
     }
 
     public Into into(String name) {
-        return new Into(name);
+        Into re =  new Into(name);
+        re._prefix = this;
+        return re;
     }
 
     public Into into(String name, String fields) {
-        return new Into(name, fields);
+        Into re = new Into(name, fields);
+        re._prefix = this;
+        return re;
     }
 
     public Into into(String name, String ... fields) {
-        return new Into(name, fields);
+        Into re = new Into(name, fields);
+        re._prefix = this;
+        return re;
     }
 
     public Into into(String name, Directive ... fields) {
-        return new Into(name, fields);
+        Into re = new Into(name, fields);
+        re._prefix = this;
+        return re;
     }
 }
