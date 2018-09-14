@@ -66,6 +66,13 @@ public class Select extends Query {
         return re;
     }
 
+    public Where where(Predicate predicate){
+        Where re = new Where(predicate);
+        re._prefix = this;
+        re._predicate = predicate;
+        return re;
+    }
+
     @Override
     public String script() {
         return String.format("select %s",

@@ -107,3 +107,9 @@ Clojure 语言中的 jaskell.sql 支持比较简单，它尽量利用java 的资
 ### Clojure 支持
 
 ## 待解决的问题
+
+## 更新
+
+### 0.0.1 
+
+Jaskell SQL 支持 `select where` 形式。 
