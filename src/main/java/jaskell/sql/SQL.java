@@ -150,6 +150,14 @@ public class SQL {
         return re;
     }
 
+    public static Not not(Directive directive){
+        return new Not(directive);
+    }
+
+    public static Not not(){
+        return new Not();
+    }
+
     public static Func func(String name){
         return new Func(name);
     }
