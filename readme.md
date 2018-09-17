@@ -116,3 +116,4 @@ Clojure 语言中的 jaskell.sql 支持比较简单，它尽量利用java 的资
  - Jaskell SQL 支持 `not exists`
  - Fixed a error in `insert into`
  - Fixed a error in predicate compare 
+ - Ddd JDBC parameter placeholder support
