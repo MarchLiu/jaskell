@@ -93,6 +93,22 @@ public class SQL {
         return new JDBCParameter<>(key);
     }
 
+    public static Parameter p(String placeHolder, int index){
+        return new JDBCParameter<>(placeHolder, index, Object.class);
+    }
+
+    public static <T> Parameter p(String placeHolder, int index, Class<T> cls){
+        return new JDBCParameter<>(placeHolder, index, cls);
+    }
+
+    public static Parameter p(String placeHolder, String key){
+        return new JDBCParameter<>(placeHolder, key);
+    }
+
+    public static <T> Parameter p(String placeHolder, String key, Class<T> cls){
+        return new JDBCParameter<>(placeHolder, key, cls);
+    }
+
     public static And and(Directive left, Directive right){
         And re = new And();
         re._left = left;
