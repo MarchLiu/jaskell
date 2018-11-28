@@ -1,4 +1,4 @@
-(defproject liu.mars/jaskell "0.1.1-SNAPSHOT"
+(defproject liu.mars/jaskell "0.1.1"
   :name "jaskell"
   :description "Rock your Java!"
   :url "https://github.com/MarchLiu/jaskell"

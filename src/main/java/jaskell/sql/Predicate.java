@@ -124,6 +124,18 @@ public abstract class Predicate implements Directive {
         return re;
     }
 
+    public <T> Predicate op(String operator, T value){
+        Binary op = new Binary() {
+            @Override
+            protected String operator() {
+                return operator;
+            }
+        };
+        op._left = this;
+        op._right = pure(value);
+        return op;
+    }
+
     public Predicate isNull(){
         IsNull re = new IsNull();
         re._prefix = this;
