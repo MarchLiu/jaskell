@@ -1,6 +1,5 @@
 package jaskell.sql;
 
-import com.sun.jnlp.ApiDialog;
 import jaskell.script.Directive;
 import jaskell.script.Parameter;
 
