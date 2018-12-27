@@ -205,4 +205,16 @@ public class SQL {
     public static Case _case(Directive expr){
         return new Case(expr);
     }
+
+    public static Coalesce coalesce(String names){
+        return new Coalesce(names);
+    }
+
+    public static Coalesce coalesce(String... names){
+        return new Coalesce(names);
+    }
+
+    public static Coalesce coalesce(Directive... names){
+        return new Coalesce(names);
+    }
 }
