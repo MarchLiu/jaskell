@@ -1,8 +1,13 @@
 package jaskell.util;
 
+import clojure.java.api.Clojure;
 import clojure.lang.IFn;
+import clojure.lang.Keyword;
 import clojure.lang.RT;
 import clojure.lang.Var;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class CR {
     static private IFn req = RT.var("clojure.core", "require");
@@ -38,5 +43,9 @@ public class CR {
 
     static public String slurp(String path){
         return (String)slurpFn.invoke(path);
+    }
+
+    static public Keyword keyword(String k){
+        return (Keyword) Clojure.read(":"+k);
     }
 }

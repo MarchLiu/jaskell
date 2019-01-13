@@ -110,7 +110,11 @@ Clojure 语言中的 jaskell.sql 支持比较简单，它尽量利用java 的资
 
 ## 更新
 
-## 0.1.2
+### 0.1.3
+
+ - CR 增加 keyword 方法
+
+### 0.1.2
 
  - Jaskell SQL 添加 Coalesce 支持
 
