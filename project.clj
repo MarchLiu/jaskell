@@ -1,4 +1,4 @@
-(defproject liu.mars/jaskell "0.1.3"
+(defproject liu.mars/jaskell "0.1.4"
   :name "jaskell"
   :description "Rock your Java!"
   :url "https://github.com/MarchLiu/jaskell"
@@ -6,7 +6,7 @@
             :url "https://opensource.org/licenses/MIT"}
   :deploy-repositories [["releases" :clojars]
                         ["snapshots" :clojars]]
-  :dependencies [[org.clojure/clojure "1.9.0"]]
+  :dependencies [[org.clojure/clojure "1.10.0"]]
   :profiles {:dev {:dependencies [[junit/junit "4.11"]
                                   [org.clojure/java.jdbc "0.7.7"]
                                   [org.xerial/sqlite-jdbc "3.23.1"]]
