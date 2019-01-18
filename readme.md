@@ -5,6 +5,10 @@
 
 ## 安装和使用
 
+```$clojure
+[liu.mars/haskell "0.2.0"]
+```
+
 ## 主要功能
 
 ### Parsec 规则引擎
