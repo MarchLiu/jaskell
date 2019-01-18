@@ -1,4 +1,4 @@
-(defproject liu.mars/jaskell "0.1.4"
+(defproject liu.mars/jaskell "0.2.0"
   :name "jaskell"
   :description "Rock your Java!"
   :url "https://github.com/MarchLiu/jaskell"
@@ -12,7 +12,8 @@
                                   [org.xerial/sqlite-jdbc "3.23.1"]]
                    :source-paths ["src/main/clojure" "src/test/clojure"]
                    :java-source-paths ["src/main/java" "src/test/java"]
-                   :junit ["src/test/java"]}}
+                   :junit ["src/test/java"]
+                   :test {:java-source-paths ["src/test/java"]}}}
   :plugins [[lein-junit "1.1.8"]]
   :java-source-paths ["src/main/java"]
   :source-paths ["src/main/clojure" "src/main/java"]

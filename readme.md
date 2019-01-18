@@ -110,6 +110,15 @@ Clojure 语言中的 jaskell.sql 支持比较简单，它尽量利用java 的资
 
 ## 更新
 
+### 0.2.0
+
+ - 增加了 java.util.Function 封装宏 function
+ - 增加了 java.util.Supplier 封装宏 supplier
+ - 增加了 java.lang.Runnable 封装宏 runnable 
+ - 增加了无参数形式的函子二阶生成宏 def-generator-0
+ - 增加了单参数形式的函子二阶生成宏 def-generator-1
+ - 增加了双参数形式的函子二阶生成宏 def-generator-2
+
 ### 0.1.3
 
  - CR 增加 keyword 方法
