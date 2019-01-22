@@ -114,6 +114,10 @@ Clojure 语言中的 jaskell.sql 支持比较简单，它尽量利用java 的资
 
 ## 更新
 
+### 0.2.1
+
+ - 封装了 Duration 的构造方法
+
 ### 0.2.0
 
  - 增加了 java.util.Function 封装宏 function
