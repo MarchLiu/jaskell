@@ -2,37 +2,37 @@
   (:import (java.util.function Function Supplier)))
 
 (defmacro def-generator-0 [name [clz handler]]
-  `(defmacro ~name [[this#] & body#]
+  `(defmacro ~name [[_#]  & body#]
      `(reify ~'~clz
-        (~'~handler [~this#]
+        (~'~handler [_]
           ~@body#))))
 
 (defmacro def-generator-1 [name [clz handler]]
-  `(defmacro ~name [[this# arg#] & body#]
+  `(defmacro ~name [[arg#] & body#]
      `(reify ~'~clz
-        (~'~handler [~this# ~arg#]
+        (~'~handler [_ ~arg#]
            ~@body#))))
 
 (defmacro def-generator-2 [name [clz handler]]
-  `(defmacro ~name [[this# a# b#] & body#]
+  `(defmacro ~name [[a# b#] & body#]
      `(reify ~'~clz
-        (~'~handler [~this# ~a# ~b#]
+        (~'~handler [_ ~a# ~b#]
           ~@body#))))
 
-(defmacro supplier [[this] & body]
+(defmacro supplier [_ & body]
   `(reify Supplier
-     (get [~this]
+     (get [_]
        ~@body)))
 
-;(defmacro function [[this arg] & body]
-;  `(reify Function
-;     (apply [~this ~arg]
-;       ~@body)))
+(defmacro function [[arg] & body]
+  `(reify Function
+     (apply [_ ~arg]
+       ~@body)))
 
-(def-generator-1 function [Function apply])
+;(def-generator-1 function [Function apply])
 
-(defmacro runnable [[this] & body]
+(defmacro runnable [[_] & body]
   `(reify Runnable
-     (run [~this]
+     (run [_]
        ~@body)))
 
