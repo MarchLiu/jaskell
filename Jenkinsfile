@@ -15,6 +15,11 @@ pipeline {
             steps {
                 sh 'lein test'
             }
+            post {
+                always {
+                    junit 'target/test-reports/*.xml'
+                }
+            }
         }
     }
 }
