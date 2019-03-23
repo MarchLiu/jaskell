@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'marsliu/clojure-devel-studio:jdk-11s'
+            image 'marsliu/clojure-devel-studio:jdk-11'
             args '-v /root/.m2:/root/.m2'
         }
     }
