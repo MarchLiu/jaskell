@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'lein do clean,uberjar'
+                sh 'lein do clean, uberjar'
             }
         }
         stage('Test') {
