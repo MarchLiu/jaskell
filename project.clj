@@ -14,7 +14,8 @@
              :java-source-paths ["src/main/java" "src/test/java"]
              :junit             ["src/test/java"]
              :test              {:java-source-paths ["src/test/java"]
-                                 :plugins           [[lein-test-report-junit-xml "0.2.0"]]}}
+                                 :plugins           [[lein-test-report-junit-xml "0.2.0"]]
+                                 :test-report-junit-xml {:output-dir "target/surefire-reports"}}}
   :plugins [[lein-junit "1.1.8"]]
   :java-source-paths ["src/main/java"]
   :source-paths ["src/main/clojure" "src/main/java"]

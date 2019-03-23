@@ -14,10 +14,11 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'lein test'
+                sh 'lein junit'
             }
             post {
                 always {
-                    junit 'target/test-reports/*.xml'
+                    junit 'target/surefire-reports/*.xml'
                 }
             }
         }
