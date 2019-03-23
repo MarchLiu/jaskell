@@ -14,7 +14,8 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'lein test'
-                sh 'lein junit'
+                sh 'lein pom'
+                sh 'mvn -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8 test'
             }
             post {
                 always {
