@@ -1,5 +1,5 @@
 *.class
-
+.lein-repl-history
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
