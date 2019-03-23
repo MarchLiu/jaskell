@@ -8,13 +8,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                lein 'do clean, compile'
+                sh 'lein do clean, compile'
             }
         }
         stage('Test') {
             steps {
-                lein 'test'
-                lein 'pom'
+                sh 'lein test'
+                sh 'lein pom'
                 sh 'mvn -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8 test'
             }
             post {
