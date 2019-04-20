@@ -2,7 +2,7 @@
   (:import (java.util.function Function Supplier)))
 
 (defmacro def-generator-0 [name [clz handler]]
-  `(defmacro ~name [[_#]  & body#]
+  `(defmacro ~name [[]  & body#]
      `(reify ~'~clz
         (~'~handler [_]
           ~@body#))))
