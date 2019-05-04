@@ -114,6 +114,10 @@ Clojure 语言中的 jaskell.sql 支持比较简单，它尽量利用java 的资
 
 ## 更新
 
+### 0.2.4
+
+ - 新增匿名 multimethod 构造支持。可以兼容内置的 multi 方法，例如 default method
+
 ### 0.2.3
 
  - 新增了 limit spec，提供字典键的有限约束规则
