@@ -136,6 +136,7 @@ Clojure 语言中的 jaskell.sql 支持比较简单，它尽量利用java 的资
 
 ### 0.2.0
 
+ - 增加了 Levenshtein 编辑距离算法的 Clojure 和 Java 实现 
  - 增加了 java.util.Function 封装宏 function
  - 增加了 java.util.Supplier 封装宏 supplier
  - 增加了 java.lang.Runnable 封装宏 runnable 
