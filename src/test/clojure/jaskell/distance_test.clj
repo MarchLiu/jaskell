@@ -14,4 +14,5 @@
                        1 (levenshtein "139.com" ".139.com")
                        3 (levenshtein "qq." "qq.com")
                        1 (levenshtein "gmail.com" "gmail.com.")
-                       1 (levenshtein ".gmail.com" "gmail.com")))
+                       1 (levenshtein ".gmail.com" "gmail.com")
+                       10 (levenshtein "ttttattttctg" "tcaaccctaccat")))

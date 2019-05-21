@@ -19,5 +19,6 @@ public class DistanceTest {
         assertEquals(3, levenshtein("qq.", "qq.com"));
         assertEquals(1, levenshtein("gmail.com", "gmail.com."));
         assertEquals(1, levenshtein(".gmail.com", "gmail.com"));
+        assertEquals(10, levenshtein("ttttattttctg", "tcaaccctaccat"));
     }
 }
