@@ -114,6 +114,14 @@ Clojure 语言中的 jaskell.sql 支持比较简单，它尽量利用java 的资
 
 ## 更新
 
+### 0.2.7
+
+ - 增加 keywordize-it 工具函数
+
+### 0.2.6
+
+ - bugs fixed
+
 ### 0.2.5
 
  - 新增小数据片段的 zip 压缩解压工具 ZipHelper。
