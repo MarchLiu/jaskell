@@ -40,3 +40,5 @@
                           ::last-name  "Bunny"
                           ::email      "bugs@example.com"
                           ::x-phone    "1000000"}))))
+
+(let [])

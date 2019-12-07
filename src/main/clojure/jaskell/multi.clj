@@ -1,7 +1,19 @@
 (ns jaskell.multi)
 
+;; copy from clojure source because them are private                                                           ;
 (def ^{:private true} default-hierarchy
   (make-hierarchy))
+
+(defn ^:private check-valid-options
+  "Throws an exception if the given option map contains keys not listed
+  as valid, else returns nil."
+  [options & valid-keys]
+  (when (seq (apply disj (apply hash-set (keys options)) valid-keys))
+    (throw
+      (IllegalArgumentException.
+        (apply str "Only these options are valid: "
+               (first valid-keys)
+               (map #(str ", " %) (rest valid-keys)))))))
 
 (defmacro multi
   "Creates a new \"anonymous\" multimethod with the associated dispatch function.
@@ -42,9 +54,8 @@
     (let [options (apply hash-map options)
           default (get options :default :default)
           hierarchy (get options :hierarchy #'default-hierarchy)]
-      ;; (check-valid-options options :default :hierarchy)
+      (check-valid-options options :default :hierarchy)
       (let [n (if multi-name
                 (name multi-name)
                 "muliti*")]
          `(new clojure.lang.MultiFn ~n ~dispatch-fn ~default ~hierarchy)))))
-

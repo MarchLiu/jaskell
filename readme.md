@@ -114,6 +114,10 @@ Clojure 语言中的 jaskell.sql 支持比较简单，它尽量利用java 的资
 
 ## 更新
 
+### 0.2.8
+
+ - 增加了 function2 handle
+
 ### 0.2.7
 
  - 增加 keywordize-it 工具函数
