@@ -6,7 +6,7 @@
 ## 安装和使用
 
 ```$clojure
-[liu.mars/haskell "0.2.0"]
+[liu.mars/jaskell "0.3.0"]
 ```
 
 ## 主要功能

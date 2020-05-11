@@ -3,7 +3,7 @@
             [jaskell.distance :refer :all]))
 
 (deftest levenshtein-test
-  (are [expect actual] (=  expect actual)
+  (are [expect actual] (= expect actual)
                        1 (levenshtein "126.com" "127.com")
                        1 (levenshtein "127.com" "126.com")
                        0 (levenshtein "hotmail.com" "hotmail.com")
